@@ -21,7 +21,7 @@ class AboutViewController: NSViewController {
     }
 
     @IBAction func onHomePage(_ sender: Any) {
-        if let url = URL(string: "https://github.com/tuyenvm/OpenKey") {
+        if let url = URL(string: "https://github.com/ToThangGTVT/OpenKeySwift") {
             NSWorkspace.shared.open(url)
         }
     }
@@ -33,7 +33,7 @@ class AboutViewController: NSViewController {
     }
 
     @IBAction func onLatestReleaseVersion(_ sender: Any) {
-        if let url = URL(string: "https://github.com/tuyenvm/OpenKey/releases") {
+        if let url = URL(string: "https://github.com/ToThangGTVT/OpenKeySwift/releases") {
             NSWorkspace.shared.open(url)
         }
     }

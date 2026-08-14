@@ -151,6 +151,17 @@ func OpenKeyInit() {
     vFixChromiumBrowser = Int32(prefs.integer(forKey: "vFixChromiumBrowser"))
     vPerformLayoutCompat = Int32(prefs.integer(forKey: "vPerformLayoutCompat"))
 
+    // Keystroke sound. Registered rather than set so upgrading users — who already
+    // have NonFirstTime, and so never run loadDefaultConfig() again — still get a
+    // sensible volume instead of 0.
+    prefs.register(defaults: ["vKeySoundVolume": 60, "vKeySoundSpecialKeys": 1])
+    vKeySound = Int32(prefs.integer(forKey: "vKeySound"))
+    vKeySoundVoice = Int32(prefs.integer(forKey: "vKeySoundVoice"))
+    vKeySoundVolume = Int32(prefs.integer(forKey: "vKeySoundVolume"))
+    vKeySoundOnlyVietnamese = Int32(prefs.integer(forKey: "vKeySoundOnlyVietnamese"))
+    vKeySoundSpecialKeys = Int32(prefs.integer(forKey: "vKeySoundSpecialKeys"))
+    KeySoundPlayer.shared.applySettings()
+
     myEventSource = CGEventSource(stateID: .privateState)
     OK_KeyInit()
 
@@ -699,6 +710,15 @@ func OpenKeyCallback(proxy: CGEventTapProxy,
     if type == .keyDown && vPerformLayoutCompat != 0 {
         // If conversion fails, use current keycode
         _keycode = ConvertEventToKeyboardLayoutCompatKeyCode(event, _keycode)
+    }
+
+    // Keystroke sound. Kept ahead of every early return below so it fires in both
+    // Vietnamese and English mode; the player itself does the (cheap) gating and
+    // hands the actual note off to its own queue.
+    if type == .keyDown && vKeySound != 0 {
+        KeySoundPlayer.shared.handleKeyDown(
+            keycode: _keycode,
+            isRepeat: event.getIntegerValueField(.keyboardEventAutorepeat) != 0)
     }
 
     // switch language shortcut; convert hotkey

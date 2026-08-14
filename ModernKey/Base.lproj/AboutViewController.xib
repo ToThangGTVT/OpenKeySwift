@@ -63,7 +63,7 @@
                                     </connections>
                                 </clickGestureRecognizer>
                             </gestureRecognizers>
-                            <textFieldCell key="cell" lineBreakMode="clipping" continuous="YES" sendsActionOnEndEditing="YES" title="https://github.com/tuyenvm/OpenKey" id="VCX-6k-cHt">
+                            <textFieldCell key="cell" lineBreakMode="clipping" continuous="YES" sendsActionOnEndEditing="YES" title="https://github.com/ToThangGTVT/OpenKeySwift" id="VCX-6k-cHt">
                                 <font key="font" metaFont="systemThin" size="13"/>
                                 <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -88,7 +88,7 @@
                                     </connections>
                                 </clickGestureRecognizer>
                             </gestureRecognizers>
-                            <textFieldCell key="cell" lineBreakMode="clipping" continuous="YES" sendsActionOnEndEditing="YES" title="https://github.com/tuyenvm/OpenKey/releases" id="zCu-0X-Rqo">
+                            <textFieldCell key="cell" lineBreakMode="clipping" continuous="YES" sendsActionOnEndEditing="YES" title="https://github.com/ToThangGTVT/OpenKeySwift/releases" id="zCu-0X-Rqo">
                                 <font key="font" metaFont="systemThin" size="13"/>
                                 <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

@@ -10,10 +10,12 @@ class ViewController: NSViewController, MyTextFieldDelegate {
     @IBOutlet weak var tabbuttonPrimary: NSButton!
     @IBOutlet weak var tabbuttonMacro: NSButton!
     @IBOutlet weak var tabbuttonSystem: NSButton!
+    @IBOutlet weak var tabbuttonSound: NSButton!
     @IBOutlet weak var tabbuttonInfo: NSButton!
     @IBOutlet weak var tabviewPrimary: NSBox!
     @IBOutlet weak var tabviewMacro: NSBox!
     @IBOutlet weak var tabviewSystem: NSBox!
+    @IBOutlet weak var tabviewSound: NSBox!
     @IBOutlet weak var tabviewInfo: NSBox!
     
     @IBOutlet weak var popupInputType: NSPopUpButton!
@@ -72,7 +74,17 @@ class ViewController: NSViewController, MyTextFieldDelegate {
     @IBOutlet weak var CustomSwitchShift: NSButton!
     @IBOutlet weak var CustomSwitchKey: MyTextField!
     @IBOutlet weak var CustomBeepSound: NSButton!
-    
+
+    @IBOutlet weak var KeySoundEnable: NSButton!
+    @IBOutlet weak var KeySoundVoice: NSPopUpButton!
+    @IBOutlet weak var KeySoundVoiceLabel: NSTextField!
+    @IBOutlet weak var KeySoundTestButton: NSButton!
+    @IBOutlet weak var KeySoundVolume: NSSlider!
+    @IBOutlet weak var KeySoundVolumeLabel: NSTextField!
+    @IBOutlet weak var KeySoundVolumeValue: NSTextField!
+    @IBOutlet weak var KeySoundOnlyVietnamese: NSButton!
+    @IBOutlet weak var KeySoundSpecialKeys: NSButton!
+
     var tabviews: [NSBox] = []
     var tabbuttons: [NSButton] = []
 
@@ -85,20 +97,23 @@ class ViewController: NSViewController, MyTextFieldDelegate {
         permissionWarning.isHidden = true
         retryButton.isEnabled = false
 
-        tabviews = [tabviewPrimary, tabviewMacro, tabviewSystem, tabviewInfo]
-        tabbuttons = [tabbuttonPrimary, tabbuttonMacro, tabbuttonSystem, tabbuttonInfo]
+        tabviews = [tabviewPrimary, tabviewMacro, tabviewSystem, tabviewSound, tabviewInfo]
+        tabbuttons = [tabbuttonPrimary, tabbuttonMacro, tabbuttonSystem, tabbuttonSound, tabbuttonInfo]
 
         showTab(0)
-        
+
         let inputTypeData = ["Telex", "VNI", "Simple Telex 1", "Simple Telex 2"]
         let codeData = OpenKeyManager.getTableCodes()
-        
+
         popupInputType.removeAllItems()
         popupInputType.addItems(withTitles: inputTypeData)
-        
+
         popupCode.removeAllItems()
         popupCode.addItems(withTitles: codeData)
-        
+
+        KeySoundVoice.removeAllItems()
+        KeySoundVoice.addItems(withTitles: KeySoundPlayer.voices.map { $0.name })
+
         initKey()
         fillData()
         
@@ -129,7 +144,7 @@ class ViewController: NSViewController, MyTextFieldDelegate {
         }
     }
     
-    /// The four tab pages share the same frame; only the selected one is visible.
+    /// The tab pages all share the same frame; only the selected one is visible.
     func showTab(_ index: Int) {
         for (i, box) in tabviews.enumerated() {
             box.isHidden = (i != index)
@@ -269,6 +284,59 @@ class ViewController: NSViewController, MyTextFieldDelegate {
         UserDefaults.standard.set(vSwitchKeyStatus, forKey: "SwitchKeyStatus")
     }
     
+    // MARK: - Keystroke sound
+
+    /// Greys out the sound settings while the feature is off.
+    private func updateKeySoundControls() {
+        let on = vKeySound != 0
+        KeySoundVoice?.isEnabled = on
+        KeySoundVoiceLabel?.isEnabled = on
+        KeySoundTestButton?.isEnabled = on
+        KeySoundVolume?.isEnabled = on
+        KeySoundVolumeLabel?.isEnabled = on
+        KeySoundVolumeValue?.isEnabled = on
+        KeySoundOnlyVietnamese?.isEnabled = on
+        KeySoundSpecialKeys?.isEnabled = on
+    }
+
+    @IBAction func onKeySoundEnable(_ sender: NSButton) {
+        vKeySound = Int32(setCustomValue(sender, keyToSet: "vKeySound"))
+        updateKeySoundControls()
+        KeySoundPlayer.shared.applySettings()
+        if vKeySound != 0 {
+            KeySoundPlayer.shared.preview()
+        }
+    }
+
+    @IBAction func onKeySoundVoiceChanged(_ sender: NSPopUpButton) {
+        vKeySoundVoice = Int32(sender.indexOfSelectedItem)
+        UserDefaults.standard.set(vKeySoundVoice, forKey: "vKeySoundVoice")
+        KeySoundPlayer.shared.preview()
+    }
+
+    @IBAction func onKeySoundVolume(_ sender: NSSlider) {
+        vKeySoundVolume = Int32(sender.intValue)
+        UserDefaults.standard.set(vKeySoundVolume, forKey: "vKeySoundVolume")
+        KeySoundVolumeValue.stringValue = "\(vKeySoundVolume)%"
+        KeySoundPlayer.shared.applySettings()
+        // Only audition on mouse-up, otherwise dragging the slider machine-guns notes.
+        if NSApp.currentEvent?.type == .leftMouseUp {
+            KeySoundPlayer.shared.preview()
+        }
+    }
+
+    @IBAction func onKeySoundTest(_ sender: Any) {
+        KeySoundPlayer.shared.preview()
+    }
+
+    @IBAction func onKeySoundOnlyVietnamese(_ sender: NSButton) {
+        vKeySoundOnlyVietnamese = Int32(setCustomValue(sender, keyToSet: "vKeySoundOnlyVietnamese"))
+    }
+
+    @IBAction func onKeySoundSpecialKeys(_ sender: NSButton) {
+        vKeySoundSpecialKeys = Int32(setCustomValue(sender, keyToSet: "vKeySoundSpecialKeys"))
+    }
+
     @IBAction func onSendKeyStepByStep(_ sender: Any) {
         vSendKeyStepByStep = Int32(setCustomValue(sender as? NSButton, keyToSet: "SendKeyStepByStep"))
     }
@@ -451,6 +519,14 @@ class ViewController: NSViewController, MyTextFieldDelegate {
         let performLayoutCompat = UserDefaults.standard.integer(forKey: "vPerformLayoutCompat")
         PerformLayoutCompat?.state = performLayoutCompat != 0 ? .on : .off
         
+        KeySoundEnable?.state = vKeySound != 0 ? .on : .off
+        KeySoundVoice?.selectItem(at: max(0, min(KeySoundPlayer.voices.count - 1, Int(vKeySoundVoice))))
+        KeySoundVolume?.intValue = Int32(vKeySoundVolume)
+        KeySoundVolumeValue?.stringValue = "\(vKeySoundVolume)%"
+        KeySoundOnlyVietnamese?.state = vKeySoundOnlyVietnamese != 0 ? .on : .off
+        KeySoundSpecialKeys?.state = vKeySoundSpecialKeys != 0 ? .on : .off
+        updateKeySoundControls()
+
         CustomSwitchControl?.state = (vSwitchKeyStatus & 0x100) != 0 ? .on : .off
         CustomSwitchOption?.state = (vSwitchKeyStatus & 0x200) != 0 ? .on : .off
         CustomSwitchCommand?.state = (vSwitchKeyStatus & 0x400) != 0 ? .on : .off
@@ -502,7 +578,7 @@ class ViewController: NSViewController, MyTextFieldDelegate {
     }
     
     @IBAction func onSourceCode(_ sender: Any) {
-        if let url = URL(string: "https://github.com/tuyenvm/OpenKey") {
+        if let url = URL(string: "https://github.com/ToThangGTVT/OpenKeySwift") {
             NSWorkspace.shared.open(url)
         }
     }

@@ -284,7 +284,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         UserDefaults.standard.set(vFixChromiumBrowser, forKey: "vFixChromiumBrowser")
         vPerformLayoutCompat = 0
         UserDefaults.standard.set(vPerformLayoutCompat, forKey: "vPerformLayoutCompat")
-        
+        vKeySound = 0
+        UserDefaults.standard.set(vKeySound, forKey: "vKeySound")
+        vKeySoundVoice = 0
+        UserDefaults.standard.set(vKeySoundVoice, forKey: "vKeySoundVoice")
+        vKeySoundVolume = 60
+        UserDefaults.standard.set(vKeySoundVolume, forKey: "vKeySoundVolume")
+        vKeySoundOnlyVietnamese = 0
+        UserDefaults.standard.set(vKeySoundOnlyVietnamese, forKey: "vKeySoundOnlyVietnamese")
+        vKeySoundSpecialKeys = 1
+        UserDefaults.standard.set(vKeySoundSpecialKeys, forKey: "vKeySoundSpecialKeys")
+        KeySoundPlayer.shared.applySettings()
+
         UserDefaults.standard.set(1, forKey: "GrayIcon")
         UserDefaults.standard.set(1, forKey: "RunOnStartup")
         
