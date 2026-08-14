@@ -27,6 +27,7 @@
                 <outlet property="FreeMarkButton" destination="f8B-EV-EE1" id="u6V-zD-Xqg"/>
                 <outlet property="KeySoundEnable" destination="Snd-en-001" id="Snd-o1-001"/>
                 <outlet property="KeySoundOnlyVietnamese" destination="Snd-ov-001" id="Snd-o2-001"/>
+                <outlet property="KeySoundRelease" destination="Snd-rl-001" id="Snd-oc-002"/>
                 <outlet property="KeySoundSpecialKeys" destination="Snd-sk-001" id="Snd-o3-001"/>
                 <outlet property="KeySoundTestButton" destination="Snd-tb-001" id="Snd-o4-001"/>
                 <outlet property="KeySoundVoice" destination="Snd-vp-001" id="Snd-o5-001"/>
@@ -87,7 +88,7 @@
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hdr-ti-tle">
                     <rect key="frame" x="84" y="542" width="200" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="OpenKey" id="Hdr-ti-cel">
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="OpenKeySwift" id="Hdr-ti-cel">
                         <font key="font" metaFont="systemBold" size="17"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -138,7 +139,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button toolTip="Cấp quyền Trợ năng cho OpenKey rồi bấm Thử lại" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D1q-YJ-LXd">
+                            <button toolTip="Cấp quyền Trợ năng cho OpenKeySwift rồi bấm Thử lại" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D1q-YJ-LXd">
                                 <rect key="frame" x="248" y="2" width="80" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                 <buttonCell key="cell" type="push" title="Thử lại" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9Fn-rM-EZd">
@@ -456,7 +457,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YGb-a8-1Lb">
                                 <rect key="frame" x="18" y="114" width="268" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <string key="toolTip">Bạn đang sử dụng Safari và dùng chế độ gõ Tiếng Việt, bạn chuyển qua Terminal và chuyển chế độ gõ qua Tiếng Anh, OpenKey sẽ tự ghi nhớ thao tác cho bạn, khi bạn chuyển về lại Safari, OpenKey sẽ tự chuyển sang chế độ Tiếng Việt, sau đó nếu lại quay lại Terminal, OpenKey cũng sẽ tự đổi qua chế độ Tiếng Anh</string>
+                                <string key="toolTip">Bạn đang sử dụng Safari và dùng chế độ gõ Tiếng Việt, bạn chuyển qua Terminal và chuyển chế độ gõ qua Tiếng Anh, OpenKeySwift sẽ tự ghi nhớ thao tác cho bạn, khi bạn chuyển về lại Safari, OpenKeySwift sẽ tự chuyển sang chế độ Tiếng Việt, sau đó nếu lại quay lại Terminal, OpenKeySwift cũng sẽ tự đổi qua chế độ Tiếng Anh</string>
                                 <buttonCell key="cell" type="check" title="Chuyển chế độ thông minh" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" inset="2" id="OF9-V8-caS">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -479,7 +480,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8zV-2v-Cyt">
                                 <rect key="frame" x="18" y="82" width="268" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <string key="toolTip">OpenKey sẽ tự động ghi nhớ bạn đã dùng bảng mã nào cho ứng dụng nào, để lần sau khi chuyển qua ứng dụng đó, OpenKey sẽ tự động chuyển sang bảng mã đó cho bạn. Rất thích hợp cho các ứng dụng kỹ thuật như Photoshop, CAD,...</string>
+                                <string key="toolTip">OpenKeySwift sẽ tự động ghi nhớ bạn đã dùng bảng mã nào cho ứng dụng nào, để lần sau khi chuyển qua ứng dụng đó, OpenKeySwift sẽ tự động chuyển sang bảng mã đó cho bạn. Rất thích hợp cho các ứng dụng kỹ thuật như Photoshop, CAD,...</string>
                                 <buttonCell key="cell" type="check" title="Tự ghi nhớ bảng mã theo ứng dụng" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" inset="2" id="Zic-gx-wRR">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -510,10 +511,10 @@
                                     <action selector="onFixRecommendBrowser:" target="-2" id="wXz-bu-AJr"/>
                                 </connections>
                             </button>
-                            <button toolTip="Bằng cách bấm phím Command, OpenKey sẽ tạm ngừng hoạt động cho tới khi bạn gõ 1 từ mới." verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1eA-ed-0Ov">
+                            <button toolTip="Bằng cách bấm phím Command, OpenKeySwift sẽ tạm ngừng hoạt động cho tới khi bạn gõ 1 từ mới." verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1eA-ed-0Ov">
                                 <rect key="frame" x="302" y="50" width="290" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Tạm tắt OpenKey bằng phím ⌘" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" inset="2" id="hx0-Hk-EOx">
+                                <buttonCell key="cell" type="check" title="Tạm tắt OpenKeySwift bằng phím ⌘" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" inset="2" id="hx0-Hk-EOx">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -521,7 +522,7 @@
                                     <action selector="onTempOffOpenKeyByHotKey:" target="-2" id="a4t-3a-rdr"/>
                                 </connections>
                             </button>
-                            <button toolTip="OpenKey sẽ tự động tắt gõ tiếng Việt khi bộ gõ hệ thống không phải là tiếng Anh." verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ej5-aI-sDd">
+                            <button toolTip="OpenKeySwift sẽ tự động tắt gõ tiếng Việt khi bộ gõ hệ thống không phải là tiếng Anh." verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ej5-aI-sDd">
                                 <rect key="frame" x="18" y="18" width="400" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Tắt tiếng Việt khi bộ gõ hệ thống khác tiếng Anh" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" inset="2" id="uew-J8-1eo">
@@ -637,7 +638,7 @@ Nếu bạn gõ "KO" sẽ thành "KHÔNG"</string>
                         <rect key="frame" x="1" y="1" width="610" height="214"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button toolTip="Hiện biểu tượng OpenKey trên thanh Dock của máy bạn" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5XE-HO-9o0">
+                            <button toolTip="Hiện biểu tượng OpenKeySwift trên thanh Dock của máy bạn" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5XE-HO-9o0">
                                 <rect key="frame" x="18" y="178" width="268" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Hiện biểu tượng trên thanh Dock" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" inset="2" id="mXT-yM-DNm">
@@ -693,7 +694,7 @@ Nếu bạn gõ "KO" sẽ thành "KHÔNG"</string>
                                     <action selector="onGrayIcon:" target="-2" id="KG7-hA-BCD"/>
                                 </connections>
                             </button>
-                            <button toolTip="Tự động kiểm tra phiên bản mới nhất mỗi khi khởi chạy OpenKey" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oZr-h6-YZJ">
+                            <button toolTip="Tự động kiểm tra phiên bản mới nhất mỗi khi khởi chạy OpenKeySwift" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oZr-h6-YZJ">
                                 <rect key="frame" x="302" y="114" width="290" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Kiểm tra bản mới lúc khởi động" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" inset="2" id="Yxn-RW-l3x">
@@ -727,7 +728,7 @@ Nếu bạn gõ "KO" sẽ thành "KHÔNG"</string>
                                     <action selector="onPerformLayoutCompat:" target="-2" id="ezk-tK-MWB"/>
                                 </connections>
                             </button>
-                            <button toolTip="Bấm vào đây để kiểm tra phiên bản mới của OpenKey" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZuJ-Ke-7Qg">
+                            <button toolTip="Bấm vào đây để kiểm tra phiên bản mới của OpenKeySwift" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZuJ-Ke-7Qg">
                                 <rect key="frame" x="16" y="10" width="170" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Kiểm tra bản mới..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="GQD-eQ-FpN">
@@ -773,12 +774,12 @@ Nếu bạn gõ "KO" sẽ thành "KHÔNG"</string>
                             <popUpButton toolTip="Chọn nhạc cụ gõ trong bộ General MIDI của macOS" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Snd-vp-001">
                                 <rect key="frame" x="112" y="141" width="210" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <popUpButtonCell key="cell" type="push" title="Gõ mộc (Wood Block)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Snd-vi-001" id="Snd-vq-001">
+                                <popUpButtonCell key="cell" type="push" title="Bàn phím cơ (thock)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Snd-vi-001" id="Snd-vq-001">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="message"/>
                                     <menu key="menu" id="Snd-vm-001">
                                         <items>
-                                            <menuItem title="Gõ mộc (Wood Block)" state="on" id="Snd-vi-001"/>
+                                            <menuItem title="Bàn phím cơ (thock)" state="on" id="Snd-vi-001"/>
                                             <menuItem id="Snd-vj-001"/>
                                         </items>
                                     </menu>
@@ -846,12 +847,23 @@ Nếu bạn gõ "KO" sẽ thành "KHÔNG"</string>
                                     <action selector="onKeySoundSpecialKeys:" target="-2" id="Snd-sa-001"/>
                                 </connections>
                             </button>
+                            <button toolTip="Bàn phím thật kêu cả khi bấm xuống lẫn khi nhả ra" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Snd-rl-001">
+                                <rect key="frame" x="18" y="40" width="268" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Có tiếng khi nhả phím" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" inset="2" id="Snd-rc-001">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onKeySoundRelease:" target="-2" id="Snd-ra-001"/>
+                                </connections>
+                            </button>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Snd-ht-001">
-                                <rect key="frame" x="18" y="20" width="574" height="32"/>
+                                <rect key="frame" x="18" y="14" width="574" height="17"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" alignment="left" id="Snd-hc-001">
                                     <font key="font" metaFont="system" size="11"/>
-                                    <string key="title">Tiếng gõ được tổng hợp bằng bộ General MIDI sẵn có của macOS và phát qua loa thường (thiết bị ra mặc định), không dùng âm báo hệ thống.</string>
+                                    <string key="title">Âm thanh tổng hợp bằng bộ General MIDI của macOS, phát qua loa thường.</string>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -869,21 +881,21 @@ Nếu bạn gõ "KO" sẽ thành "KHÔNG"</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7u-GE-f2u">
-                                <rect key="frame" x="18" y="122" width="76" height="76"/>
+                                <rect key="frame" x="18" y="116" width="76" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="Icon" id="7jC-zc-3Na"/>
                             </imageView>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rpD-yE-eVi">
-                                <rect key="frame" x="110" y="170" width="470" height="22"/>
+                                <rect key="frame" x="110" y="164" width="470" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="left" title="OpenKey - Bộ gõ Tiếng Việt nguồn mở đa nền tảng" id="ITy-e9-YzB">
+                                <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="left" title="OpenKeySwift - Bộ gõ Tiếng Việt nguồn mở đa nền tảng" id="ITy-e9-YzB">
                                     <font key="font" metaFont="systemBold" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bXh-ai-gk3">
-                                <rect key="frame" x="110" y="146" width="470" height="18"/>
+                                <rect key="frame" x="110" y="140" width="470" height="18"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="left" title="Phiên bản: 1.0, cập nhật ngày 1/1/2019" id="Ntd-DR-Tpa">
                                     <font key="font" metaFont="system" size="12"/>
@@ -892,42 +904,17 @@ Nếu bạn gõ "KO" sẽ thành "KHÔNG"</string>
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qlz-Sz-VDa">
-                                <rect key="frame" x="18" y="66" width="574" height="52"/>
+                                <rect key="frame" x="18" y="58" width="574" height="52"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" alignment="left" id="B3Z-2e-1t0">
                                     <font key="font" metaFont="system" size="12"/>
-                                    <string key="title">OpenKey cho macOS là phần mềm mã nguồn mở và được phát hành miễn phí. Bạn hoàn toàn có thể đóng góp ý kiến, yêu cầu tính năng mới qua email của tác giả hoặc trên github.</string>
+                                    <string key="title">OpenKeySwift cho macOS là phần mềm mã nguồn mở và được phát hành miễn phí. Bạn hoàn toàn có thể đóng góp ý kiến, yêu cầu tính năng mới qua email của tác giả hoặc trên github.</string>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="umA-Yh-Pbd">
-                                <rect key="frame" x="18" y="35" width="150" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Mai Vũ Tuyên © 2019 - " id="CwO-3m-MrD">
-                                    <font key="font" metaFont="system" size="12"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField toolTip="Gửi email cho tác giả" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hr-xh-URk">
-                                <rect key="frame" x="172" y="35" width="220" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <gestureRecognizers>
-                                    <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="pAB-RE-9oV">
-                                        <connections>
-                                            <action selector="onEmailLink:" target="-2" id="Drb-Y6-gJv"/>
-                                        </connections>
-                                    </clickGestureRecognizer>
-                                </gestureRecognizers>
-                                <textFieldCell key="cell" lineBreakMode="truncatingTail" continuous="YES" sendsActionOnEndEditing="YES" title="maivutuyen.91@gmail.com" id="gZX-OZ-lQW">
-                                    <font key="font" metaFont="system" size="12"/>
-                                    <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button toolTip="Xem mã nguồn trên GitHub" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V8B-er-EO9">
-                                <rect key="frame" x="452" y="24" width="140" height="32"/>
+                                <rect key="frame" x="452" y="16" width="140" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Mã nguồn..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fQH-k0-0aa">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -942,7 +929,7 @@ Nếu bạn gõ "KO" sẽ thành "KHÔNG"</string>
                     <color key="borderColor" name="separatorColor" catalog="System" colorSpace="catalog"/>
                     <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
-                <button toolTip="Thoát khỏi OpenKey" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="whS-p0-Sr2">
+                <button toolTip="Thoát khỏi OpenKeySwift" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="whS-p0-Sr2">
                     <rect key="frame" x="24" y="24" width="110" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <buttonCell key="cell" type="push" title="Kết thúc" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CNG-WA-ntA">

@@ -154,12 +154,13 @@ func OpenKeyInit() {
     // Keystroke sound. Registered rather than set so upgrading users — who already
     // have NonFirstTime, and so never run loadDefaultConfig() again — still get a
     // sensible volume instead of 0.
-    prefs.register(defaults: ["vKeySoundVolume": 60, "vKeySoundSpecialKeys": 1])
+    prefs.register(defaults: ["vKeySoundVolume": 60, "vKeySoundSpecialKeys": 1, "vKeySoundRelease": 1])
     vKeySound = Int32(prefs.integer(forKey: "vKeySound"))
     vKeySoundVoice = Int32(prefs.integer(forKey: "vKeySoundVoice"))
     vKeySoundVolume = Int32(prefs.integer(forKey: "vKeySoundVolume"))
     vKeySoundOnlyVietnamese = Int32(prefs.integer(forKey: "vKeySoundOnlyVietnamese"))
     vKeySoundSpecialKeys = Int32(prefs.integer(forKey: "vKeySoundSpecialKeys"))
+    vKeySoundRelease = Int32(prefs.integer(forKey: "vKeySoundRelease"))
     KeySoundPlayer.shared.applySettings()
 
     myEventSource = CGEventSource(stateID: .privateState)
@@ -715,10 +716,14 @@ func OpenKeyCallback(proxy: CGEventTapProxy,
     // Keystroke sound. Kept ahead of every early return below so it fires in both
     // Vietnamese and English mode; the player itself does the (cheap) gating and
     // hands the actual note off to its own queue.
-    if type == .keyDown && vKeySound != 0 {
-        KeySoundPlayer.shared.handleKeyDown(
-            keycode: _keycode,
-            isRepeat: event.getIntegerValueField(.keyboardEventAutorepeat) != 0)
+    if vKeySound != 0 {
+        if type == .keyDown {
+            KeySoundPlayer.shared.handleKeyDown(
+                keycode: _keycode,
+                isRepeat: event.getIntegerValueField(.keyboardEventAutorepeat) != 0)
+        } else if type == .keyUp {
+            KeySoundPlayer.shared.handleKeyUp(keycode: _keycode)
+        }
     }
 
     // switch language shortcut; convert hotkey

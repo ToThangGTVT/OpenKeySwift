@@ -7,6 +7,13 @@
 //  bundled with the app. Output goes through AVAudioEngine's main mixer, i.e. the
 //  normal speaker — not the system alert device that NSSound.beep() uses.
 //
+//  A single drum sample on its own sounds thin and mechanical. Real key noise is two
+//  events — a bright click and a duller body — plus a quieter one when the key comes
+//  back up, and no two presses sound quite alike. So each voice here layers two notes,
+//  rotates between variants so consecutive keys differ, and optionally clicks on
+//  release. (Varying pitch instead would be the obvious trick, but the GM drum kit
+//  ignores pitch bend: bending it ±2 semitones leaves the rendered waveform unchanged.)
+//
 
 import AVFoundation
 import Carbon
@@ -19,40 +26,63 @@ var vKeySoundVoice: Int32 = 0
 var vKeySoundVolume: Int32 = 60
 var vKeySoundOnlyVietnamese: Int32 = 0
 var vKeySoundSpecialKeys: Int32 = 1
+var vKeySoundRelease: Int32 = 1
 
 final class KeySoundPlayer {
 
     static let shared = KeySoundPlayer()
 
-    /// A GM percussion voice that sounds like a keypress. `note` and `altNote` are
-    /// MIDI note numbers on the General MIDI drum map.
+    /// One note of a layered hit. `gain` is dB relative to the layer struck hardest,
+    /// applied through MIDI velocity.
+    struct Layer {
+        let note: UInt8
+        let gain: Float
+        init(_ note: UInt8, _ gain: Float = 0) { self.note = note; self.gain = gain }
+    }
+
     struct Voice {
         let name: String
-        let note: UInt8
-        let altNote: UInt8
-        /// Make-up gain in dB. The bank's percussion samples differ hugely in level
-        /// — Hi-Hat sits about 6 dB below Wood Block — so each voice carries a trim
-        /// that brings it to roughly the same peak. Calibrated at velocity 127 against
-        /// the macOS GM bank at 48 kHz, which renders ~1.4x hotter than 44.1 kHz; using
-        /// the louder rate as the reference keeps 44.1 kHz devices clear of clipping too.
+        /// Struck together on key down. The variants rotate per keystroke so a run of
+        /// typing doesn't sound like the same sample looping.
+        let down: [[Layer]]
+        /// Space / Enter / Delete / Tab when the special-key option is on.
+        let alt: [Layer]
+        /// Quieter hit when the key is released.
+        let up: [Layer]
+        /// Make-up gain in dB bringing this voice to the same peak as the others.
+        /// Calibrated at velocity 127 against the macOS GM bank at 48 kHz, which
+        /// renders ~1.4x hotter than 44.1 kHz; using the louder rate as the reference
+        /// keeps 44.1 kHz devices clear of clipping too.
         let trim: Float
     }
 
     /// Order must stay in sync with the popup in ViewController.xib — the selected
     /// index is what gets persisted.
     static let voices: [Voice] = [
-        Voice(name: "Gõ mộc (Wood Block)",    note: 76, altNote: 77, trim: 4.3),
-        Voice(name: "Lách cách (Side Stick)", note: 37, altNote: 38, trim: 4.9),
-        Voice(name: "Máy đánh chữ (Claves)",  note: 75, altNote: 76, trim: 4.3),
-        Voice(name: "Hi-Hat",                 note: 42, altNote: 46, trim: 10.8),
-        Voice(name: "Chuông (Triangle)",      note: 80, altNote: 81, trim: 7.5),
-        Voice(name: "Vỗ tay (Hand Clap)",     note: 39, altNote: 39, trim: 9.4),
+        Voice(name: "Bàn phím cơ (thock)",
+              down: [[Layer(77), Layer(37, -5)], [Layer(76, -1), Layer(37, -5)]],
+              alt: [Layer(41), Layer(37, -5)], up: [Layer(76, -6)], trim: 3.2),
+        Voice(name: "Bàn phím cơ (clicky)",
+              down: [[Layer(75), Layer(42, -3)], [Layer(76, -1), Layer(42, -3)]],
+              alt: [Layer(75), Layer(37, -3)], up: [Layer(42, -0.5)], trim: 3.4),
+        Voice(name: "Máy đánh chữ",
+              down: [[Layer(37), Layer(42, -4)], [Layer(37, -2), Layer(75, -6)]],
+              alt: [Layer(38, -3), Layer(42, -4)], up: [Layer(75, -7)], trim: 5.3),
+        Voice(name: "Gõ mộc",
+              down: [[Layer(76), Layer(77, -4)], [Layer(77), Layer(76, -4)]],
+              alt: [Layer(75), Layer(77, -4)], up: [Layer(76, -6)], trim: 2.4),
+        Voice(name: "Trầm sâu",
+              down: [[Layer(41), Layer(77, -6)], [Layer(43, -1), Layer(77, -6)]],
+              alt: [Layer(41), Layer(37, -8)], up: [Layer(77, -6)], trim: 3.0),
+        Voice(name: "Êm nhẹ",
+              down: [[Layer(42), Layer(80, -10)], [Layer(42, -2), Layer(80, -12)]],
+              alt: [Layer(42), Layer(37, -10)], up: [Layer(42, -7)], trim: 16.2),
     ]
 
     private static let bankURL = URL(fileURLWithPath:
         "/System/Library/Components/CoreAudio.component/Contents/Resources/gs_instruments.dls")
 
-    /// Keys that get `altNote` when "âm riêng cho phím đặc biệt" is on.
+    /// Keys that get `alt` when "âm riêng cho phím đặc biệt" is on.
     private static let specialKeyCodes: Set<CGKeyCode> = [
         CGKeyCode(kVK_Space), CGKeyCode(kVK_Return), CGKeyCode(kVK_ANSI_KeypadEnter),
         CGKeyCode(kVK_Delete), CGKeyCode(kVK_ForwardDelete), CGKeyCode(kVK_Tab),
@@ -69,10 +99,12 @@ final class KeySoundPlayer {
     private let queue = DispatchQueue(label: "org.openkey.keysound", qos: .userInteractive)
 
     private var isPrepared = false
-    private var lastPlayed: CFTimeInterval = 0
+    private var lastDown: CFTimeInterval = 0
+    private var lastUp: CFTimeInterval = 0
 
     /// Key repeat can fire far faster than the samples decay; ignore anything closer
-    /// together than this so holding a key doesn't turn into a buzz.
+    /// together than this so holding a key doesn't turn into a buzz. Down and up are
+    /// throttled separately, otherwise a quick tap loses its release click.
     private let minInterval: CFTimeInterval = 0.012
 
     private init() {
@@ -103,26 +135,61 @@ final class KeySoundPlayer {
 
     /// Called from the CGEventTap callback — must return immediately.
     func handleKeyDown(keycode: CGKeyCode, isRepeat: Bool) {
-        guard vKeySound != 0 else { return }
-        if vKeySoundOnlyVietnamese != 0 && vLanguage == 0 { return }
+        guard vKeySound != 0, passesLanguageGate() else { return }
 
         let now = CACurrentMediaTime()
-        if now - lastPlayed < minInterval { return }
-        lastPlayed = now
+        if now - lastDown < minInterval { return }
+        lastDown = now
 
-        let useAlt = vKeySoundSpecialKeys != 0 && Self.specialKeyCodes.contains(keycode)
-        // Slight velocity jitter keeps a long burst of typing from sounding robotic.
-        // Only ever downwards, so the calibrated trims stay clear of clipping.
+        let voice = Self.currentVoice()
+        let layers: [Layer]
+        if vKeySoundSpecialKeys != 0 && Self.specialKeyCodes.contains(keycode) {
+            layers = voice.alt
+        } else {
+            // Rotate variants by key so neighbouring keys don't sound identical.
+            layers = voice.down[Int(keycode) % voice.down.count]
+        }
+        // Velocity jitter, downwards only so the calibrated trims stay clear of clipping.
         let drop = Int32(keycode % 7) + (isRepeat ? 12 : 0)
-        queue.async { self.strike(useAlt: useAlt, velocityDrop: drop) }
+        queue.async { self.strike(layers, trim: voice.trim, velocityDrop: drop) }
     }
 
-    /// Plays one note with the current settings — used by the "Nghe thử" button.
+    /// The quieter click as the key comes back up.
+    func handleKeyUp(keycode: CGKeyCode) {
+        guard vKeySound != 0, vKeySoundRelease != 0, passesLanguageGate() else { return }
+
+        let now = CACurrentMediaTime()
+        if now - lastUp < minInterval { return }
+        lastUp = now
+
+        let voice = Self.currentVoice()
+        guard !voice.up.isEmpty else { return }
+        let drop = Int32(keycode % 5)
+        queue.async { self.strike(voice.up, trim: voice.trim, velocityDrop: drop) }
+    }
+
+    /// Plays one hit with the current settings — used by the "Nghe thử" button.
     func preview() {
+        let voice = Self.currentVoice()
         queue.async {
             self.prepare()
-            self.strike(useAlt: false, velocityDrop: 0)
+            self.strike(voice.down[0], trim: voice.trim, velocityDrop: 0)
+            if vKeySoundRelease != 0 && !voice.up.isEmpty {
+                self.queue.asyncAfter(deadline: .now() + 0.09) {
+                    self.strike(voice.up, trim: voice.trim, velocityDrop: 0)
+                }
+            }
         }
+    }
+
+    // MARK: - Helpers
+
+    private static func currentVoice() -> Voice {
+        voices[Int(max(0, min(Int32(voices.count - 1), vKeySoundVoice)))]
+    }
+
+    private func passesLanguageGate() -> Bool {
+        !(vKeySoundOnlyVietnamese != 0 && vLanguage == 0)
     }
 
     // MARK: - Engine (queue only)
@@ -181,28 +248,25 @@ final class KeySoundPlayer {
         }
     }
 
-    private func strike(useAlt: Bool, velocityDrop: Int32) {
+    private func strike(_ layers: [Layer], trim: Float, velocityDrop: Int32) {
         prepare()
-        guard isPrepared, engine.isRunning else { return }
+        guard isPrepared, engine.isRunning, vKeySoundVolume > 0 else { return }
 
-        guard vKeySoundVolume > 0 else { return }
-
-        let voice = Self.voices[Int(max(0, min(Int32(Self.voices.count - 1), vKeySoundVoice)))]
-        let note = useAlt ? voice.altNote : voice.note
-
-        // Drive the sampler near full velocity and do all the loudness shaping in the
-        // gain stage: the per-voice trim plus the user's volume, converted to dB.
-        // It has to be the gain stage rather than mainMixerNode.outputVolume — changing
-        // the mixer's volume once the engine is already running has no effect, so the
-        // slider would only ever have worked on the very first play.
+        // All loudness shaping happens in the gain stage: the per-voice trim plus the
+        // user's volume in dB. It has to be here rather than mainMixerNode.outputVolume
+        // — changing the mixer's volume once the engine is already running has no
+        // effect, so the slider would only ever have worked on the very first play.
         let level = Float(max(0, min(100, vKeySoundVolume))) / 100.0
-        gain.globalGain = min(24, max(-96, voice.trim + 20 * log10(level)))
-        let velocity = UInt8(max(40, min(127, 127 - velocityDrop)))
+        gain.globalGain = min(24, max(-96, trim + 20 * log10(level)))
 
-        sampler.startNote(note, withVelocity: velocity, onChannel: 0)
-        // One-shot samples ignore note-off, but sending it frees the voice slot.
-        queue.asyncAfter(deadline: .now() + 0.15) {
-            self.sampler.stopNote(note, onChannel: 0)
+        for layer in layers {
+            let scaled = 127.0 * pow(10.0, layer.gain / 20.0) - Float(velocityDrop)
+            let velocity = UInt8(max(8, min(127, Int32(scaled))))
+            sampler.startNote(layer.note, withVelocity: velocity, onChannel: 0)
+        }
+        // One-shot samples ignore note-off, but sending it frees the voice slots.
+        queue.asyncAfter(deadline: .now() + 0.2) {
+            for layer in layers { self.sampler.stopNote(layer.note, onChannel: 0) }
         }
     }
 

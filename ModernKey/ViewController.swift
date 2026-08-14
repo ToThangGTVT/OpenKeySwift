@@ -84,6 +84,7 @@ class ViewController: NSViewController, MyTextFieldDelegate {
     @IBOutlet weak var KeySoundVolumeValue: NSTextField!
     @IBOutlet weak var KeySoundOnlyVietnamese: NSButton!
     @IBOutlet weak var KeySoundSpecialKeys: NSButton!
+    @IBOutlet weak var KeySoundRelease: NSButton!
 
     var tabviews: [NSBox] = []
     var tabbuttons: [NSButton] = []
@@ -125,7 +126,7 @@ class ViewController: NSViewController, MyTextFieldDelegate {
     override func viewDidAppear() {
         super.viewDidAppear()
         let shortVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
-        self.view.window?.title = "OpenKey \(shortVersion) - Bộ gõ Tiếng Việt"
+        self.view.window?.title = "OpenKeySwift \(shortVersion) - Bộ gõ Tiếng Việt"
     }
     
     override func viewWillAppear() {
@@ -297,6 +298,7 @@ class ViewController: NSViewController, MyTextFieldDelegate {
         KeySoundVolumeValue?.isEnabled = on
         KeySoundOnlyVietnamese?.isEnabled = on
         KeySoundSpecialKeys?.isEnabled = on
+        KeySoundRelease?.isEnabled = on
     }
 
     @IBAction func onKeySoundEnable(_ sender: NSButton) {
@@ -335,6 +337,11 @@ class ViewController: NSViewController, MyTextFieldDelegate {
 
     @IBAction func onKeySoundSpecialKeys(_ sender: NSButton) {
         vKeySoundSpecialKeys = Int32(setCustomValue(sender, keyToSet: "vKeySoundSpecialKeys"))
+    }
+
+    @IBAction func onKeySoundRelease(_ sender: NSButton) {
+        vKeySoundRelease = Int32(setCustomValue(sender, keyToSet: "vKeySoundRelease"))
+        KeySoundPlayer.shared.preview()
     }
 
     @IBAction func onSendKeyStepByStep(_ sender: Any) {
@@ -525,6 +532,7 @@ class ViewController: NSViewController, MyTextFieldDelegate {
         KeySoundVolumeValue?.stringValue = "\(vKeySoundVolume)%"
         KeySoundOnlyVietnamese?.state = vKeySoundOnlyVietnamese != 0 ? .on : .off
         KeySoundSpecialKeys?.state = vKeySoundSpecialKeys != 0 ? .on : .off
+        KeySoundRelease?.state = vKeySoundRelease != 0 ? .on : .off
         updateKeySoundControls()
 
         CustomSwitchControl?.state = (vSwitchKeyStatus & 0x100) != 0 ? .on : .off
@@ -561,11 +569,6 @@ class ViewController: NSViewController, MyTextFieldDelegate {
     
     
     
-    @IBAction func onEmailLink(_ sender: Any) {
-        if let url = URL(string: "mailto:maivutuyen.91@gmail.com") {
-            NSWorkspace.shared.open(url)
-        }
-    }
     
     @IBAction func onSourceCode(_ sender: Any) {
         if let url = URL(string: "https://github.com/ToThangGTVT/OpenKeySwift") {

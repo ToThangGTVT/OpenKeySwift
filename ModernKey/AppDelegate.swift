@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func askPermission() {
         let alert = NSAlert()
-        alert.messageText = "OpenKey cần bạn cấp quyền để có thể hoạt động!"
+        alert.messageText = "OpenKeySwift cần bạn cấp quyền để có thể hoạt động!"
         alert.informativeText = "Vui lòng chạy lại ứng dụng sau khi cấp quyền."
         alert.addButton(withTitle: "Không")
         alert.addButton(withTitle: "Cấp quyền")
@@ -294,6 +294,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         UserDefaults.standard.set(vKeySoundOnlyVietnamese, forKey: "vKeySoundOnlyVietnamese")
         vKeySoundSpecialKeys = 1
         UserDefaults.standard.set(vKeySoundSpecialKeys, forKey: "vKeySoundSpecialKeys")
+        vKeySoundRelease = 1
+        UserDefaults.standard.set(vKeySoundRelease, forKey: "vKeySoundRelease")
         KeySoundPlayer.shared.applySettings()
 
         UserDefaults.standard.set(1, forKey: "GrayIcon")
@@ -448,7 +450,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func onControlPanelSelected() {
         show(&mainWC) {
             self.makeWindowController(ViewController(nibName: "ViewController", bundle: nil),
-                                      title: "OpenKey - Bộ gõ Tiếng Việt")
+                                      title: "OpenKeySwift - Bộ gõ Tiếng Việt")
         }
     }
 

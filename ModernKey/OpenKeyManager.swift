@@ -152,8 +152,8 @@ class OpenKeyManager: NSObject {
     
     class func showUpdateMessage(_ parent: NSWindow?, needUpdating: Bool, newVersion: String) {
         let alert = NSAlert()
-        alert.messageText = needUpdating ? "OpenKey Có phiên bản mới (\(newVersion)), bạn có muốn cập nhật không?" : "Bạn đang dùng phiên bản mới nhất!"
-        alert.informativeText = needUpdating ? "Bấm 'Có' để cập nhật OpenKey." : ""
+        alert.messageText = needUpdating ? "OpenKeySwift có phiên bản mới (\(newVersion)), bạn có muốn cập nhật không?" : "Bạn đang dùng phiên bản mới nhất!"
+        alert.informativeText = needUpdating ? "Bấm 'Có' để cập nhật OpenKeySwift." : ""
         
         if !needUpdating {
             alert.addButton(withTitle: "OK")

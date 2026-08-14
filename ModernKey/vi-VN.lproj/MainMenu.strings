@@ -1,8 +1,8 @@
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "1UK-8n-QPP"; */
 "1UK-8n-QPP.title" = "Customize Toolbar…";
 
-/* Class = "NSMenuItem"; title = "OpenKey"; ObjectID = "1Xt-HY-uBw"; */
-"1Xt-HY-uBw.title" = "OpenKey";
+/* Class = "NSMenuItem"; title = "OpenKeySwift"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "OpenKeySwift";
 
 /* Class = "NSMenu"; title = "Find"; ObjectID = "1b7-l0-nxx"; */
 "1b7-l0-nxx.title" = "Find";
@@ -34,8 +34,8 @@
 /* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "4J7-dP-txa"; */
 "4J7-dP-txa.title" = "Enter Full Screen";
 
-/* Class = "NSMenuItem"; title = "Quit OpenKey"; ObjectID = "4sb-4s-VLi"; */
-"4sb-4s-VLi.title" = "Quit OpenKey";
+/* Class = "NSMenuItem"; title = "Quit OpenKeySwift"; ObjectID = "4sb-4s-VLi"; */
+"4sb-4s-VLi.title" = "Quit OpenKeySwift";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "5QF-Oa-p0T"; */
 "5QF-Oa-p0T.title" = "Edit";
@@ -43,8 +43,8 @@
 /* Class = "NSMenuItem"; title = "Copy Style"; ObjectID = "5Vv-lz-BsD"; */
 "5Vv-lz-BsD.title" = "Copy Style";
 
-/* Class = "NSMenuItem"; title = "About OpenKey"; ObjectID = "5kV-Vb-QxS"; */
-"5kV-Vb-QxS.title" = "About OpenKey";
+/* Class = "NSMenuItem"; title = "About OpenKeySwift"; ObjectID = "5kV-Vb-QxS"; */
+"5kV-Vb-QxS.title" = "About OpenKeySwift";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam"; */
 "6dh-zS-Vam.title" = "Redo";
@@ -82,8 +82,8 @@
 /* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
 "F2S-fz-NVQ.title" = "Help";
 
-/* Class = "NSMenuItem"; title = "OpenKey Help"; ObjectID = "FKE-Sm-Kum"; */
-"FKE-Sm-Kum.title" = "OpenKey Help";
+/* Class = "NSMenuItem"; title = "OpenKeySwift Help"; ObjectID = "FKE-Sm-Kum"; */
+"FKE-Sm-Kum.title" = "OpenKeySwift Help";
 
 /* Class = "NSMenuItem"; title = "Text"; ObjectID = "Fal-I4-PZk"; */
 "Fal-I4-PZk.title" = "Text";
@@ -160,8 +160,8 @@
 /* Class = "NSMenuItem"; title = "Baseline"; ObjectID = "OaQ-X3-Vso"; */
 "OaQ-X3-Vso.title" = "Baseline";
 
-/* Class = "NSMenuItem"; title = "Hide OpenKey"; ObjectID = "Olw-nP-bQN"; */
-"Olw-nP-bQN.title" = "Hide OpenKey";
+/* Class = "NSMenuItem"; title = "Hide OpenKeySwift"; ObjectID = "Olw-nP-bQN"; */
+"Olw-nP-bQN.title" = "Hide OpenKeySwift";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "OwM-mh-QMV"; */
 "OwM-mh-QMV.title" = "Find Previous";
@@ -352,8 +352,8 @@
 /* Class = "NSMenu"; title = "Kern"; ObjectID = "tlD-Oa-oAM"; */
 "tlD-Oa-oAM.title" = "Kern";
 
-/* Class = "NSMenu"; title = "OpenKey"; ObjectID = "uQy-DD-JDr"; */
-"uQy-DD-JDr.title" = "OpenKey";
+/* Class = "NSMenu"; title = "OpenKeySwift"; ObjectID = "uQy-DD-JDr"; */
+"uQy-DD-JDr.title" = "OpenKeySwift";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "uRl-iY-unG"; */
 "uRl-iY-unG.title" = "Cut";
