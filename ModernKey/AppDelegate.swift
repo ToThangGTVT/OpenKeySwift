@@ -32,7 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func askPermission() {
         let alert = NSAlert()
         alert.messageText = "OpenKeySwift cần bạn cấp quyền để có thể hoạt động!"
-        alert.informativeText = "Vui lòng chạy lại ứng dụng sau khi cấp quyền."
+        alert.informativeText = "Không cấp quyền ứng dụng vẫn chạy nhưng không gõ được Tiếng Việt."
         alert.addButton(withTitle: "Không")
         alert.addButton(withTitle: "Cấp quyền")
         
@@ -43,7 +43,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if res.rawValue == 1001 {
             MJAccessibilityOpenPanel()
         }
-        NSApp.terminate(nil)
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -80,7 +79,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if !MJAccessibilityIsEnabled() {
             askPermission()
-            return
         }
         
         vShowIconOnDock = Int32(UserDefaults.standard.integer(forKey: "vShowIconOnDock"))
@@ -115,6 +113,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if dontCheckUpdate == 0 {
             OpenKeyManager.checkNewVersion(nil, callbackFunc: nil)
         }
+        
+        ClipboardManager.shared.start()
         
         let val = UserDefaults.standard.integer(forKey: "RunOnStartup")
         setRunOnStartup(val != 0)
@@ -155,6 +155,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         theMenu.addItem(withTitle: "Công cụ chuyển mã...", action: #selector(onConvertTool), keyEquivalent: "")
         mnuQuickConvert = theMenu.addItem(withTitle: "Chuyển mã nhanh", action: #selector(onQuickConvert), keyEquivalent: "")
+        
+        let menuClipboard = theMenu.addItem(withTitle: "Lịch sử Clipboard", action: nil, keyEquivalent: "")
+        theMenu.setSubmenu(ClipboardMenu.shared, for: menuClipboard)
         
         theMenu.addItem(NSMenuItem.separator())
         
@@ -444,6 +447,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         } else {
             OpenKeyManager.showMessage(nil, message: "Không có dữ liệu trong clipboard!", subMsg: "Hãy sao chép một đoạn text để chuyển đổi!")
+        }
+    }
+    
+    @objc func showClipboardHistory() {
+        guard UserDefaults.standard.bool(forKey: ClipboardManager.shared.enableKey) else { return }
+        DispatchQueue.main.async {
+            ClipboardPanel.shared.present()
         }
     }
     

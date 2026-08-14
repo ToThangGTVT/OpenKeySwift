@@ -3,6 +3,9 @@ import Carbon
 
 @objc protocol MyTextFieldDelegate: AnyObject {
     @objc optional func onMyTextFieldKeyChange(_ keyCode: UInt16, character: UInt16)
+    /// Same thing, but says which field changed — needed once a controller owns
+    /// more than one hotkey field. Takes precedence when implemented.
+    @objc optional func myTextField(_ field: MyTextField, didChangeKeyCode keyCode: UInt16, character: UInt16)
 }
 
 @objc(MyTextField)
@@ -42,16 +45,23 @@ class MyTextField: NSTextField, NSTextFieldDelegate {
         }
     }
 
+    private func notifyParent(_ keyCode: UInt16, _ character: UInt16) {
+        if let _ = parent?.myTextField?(self, didChangeKeyCode: keyCode, character: character) {
+            return
+        }
+        parent?.onMyTextFieldKeyChange?(keyCode, character: character)
+    }
+
     override func textDidChange(_ notification: Notification) {
         if lastKeyCode == UInt16(kVK_Space) {
             self.stringValue = "Space"
-            parent?.onMyTextFieldKeyChange?(UInt16(kVK_Space), character: UInt16(kVK_Space))
+            notifyParent(UInt16(kVK_Space), UInt16(kVK_Space))
         } else if lastKeyCode == UInt16(kVK_Delete) || lastKeyCode == UInt16(kVK_ForwardDelete) {
             self.stringValue = ""
-            parent?.onMyTextFieldKeyChange?(0xFE, character: 0xFE)
+            notifyParent(0xFE, 0xFE)
         } else {
             self.stringValue = ""
-            parent?.onMyTextFieldKeyChange?(lastKeyCode, character: lastKeyChar)
+            notifyParent(lastKeyCode, lastKeyChar)
             if let scalar = UnicodeScalar(lastKeyChar) {
                 self.stringValue = String(Character(scalar))
             }
