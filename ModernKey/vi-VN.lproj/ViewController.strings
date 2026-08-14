@@ -1,0 +1,68 @@
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "2AS-Yr-pzd"; */
+"2AS-Yr-pzd.title" = "OK";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "5SM-Mt-ady"; */
+"5SM-Mt-ady.title" = "Box";
+
+/* Class = "NSTextFieldCell"; title = "Ứng dụng đang hoạt động"; ObjectID = "6Sy-RY-IXj"; */
+"6Sy-RY-IXj.title" = "Ứng dụng đang hoạt động";
+
+/* Class = "NSButtonCell"; title = "Kiểm tra chính tả"; ObjectID = "7Er-ll-Fkc"; */
+"7Er-ll-Fkc.title" = "Kiểm tra chính tả";
+
+/* Class = "NSButtonCell"; title = "Thử lại"; ObjectID = "9Fn-rM-EZd"; */
+"9Fn-rM-EZd.title" = "Thử lại";
+
+/* Class = "NSButtonCell"; title = "Kết thúc"; ObjectID = "CNG-WA-ntA"; */
+"CNG-WA-ntA.title" = "Kết thúc";
+
+/* Class = "NSTextFieldCell"; title = "Bạn chưa cấp quyền cho ứng dụng hoạt động!"; ObjectID = "Knd-Uw-Frn"; */
+"Knd-Uw-Frn.title" = "Bạn chưa cấp quyền cho ứng dụng hoạt động!";
+
+/* Class = "NSTextFieldCell"; title = "Kiểu gõ:"; ObjectID = "Ph3-HI-YUI"; */
+"Ph3-HI-YUI.title" = "Kiểu gõ:";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "S26-ZU-sFD"; */
+"S26-ZU-sFD.title" = "Box";
+
+/* Class = "NSMenuItem"; title = "Unicode"; ObjectID = "SPQ-uQ-a3m"; */
+"SPQ-uQ-a3m.title" = "Unicode";
+
+/* Class = "NSButtonCell"; title = "English"; ObjectID = "Tt6-ic-NdA"; */
+"Tt6-ic-NdA.title" = "English";
+
+/* Class = "NSButtonCell"; title = "Cho phép bỏ dấu tự do"; ObjectID = "Ui6-aS-2kf"; */
+"Ui6-aS-2kf.title" = "Cho phép bỏ dấu tự do";
+
+/* Class = "NSTextFieldCell"; title = "Chế độ gõ:"; ObjectID = "ZQ9-HB-tjy"; */
+"ZQ9-HB-tjy.title" = "Chế độ gõ:";
+
+/* Class = "NSButtonCell"; title = "Mặc định"; ObjectID = "bgY-iv-wGA"; */
+"bgY-iv-wGA.title" = "Mặc định";
+
+/* Class = "NSMenuItem"; title = "VNI"; ObjectID = "chN-yL-Ibb"; */
+"chN-yL-Ibb.title" = "VNI";
+
+/* Class = "NSTextFieldCell"; title = "Phím chuyển:"; ObjectID = "dSf-bA-q9f"; */
+"dSf-bA-q9f.title" = "Phím chuyển:";
+
+/* Class = "NSButtonCell"; title = "Khởi động cùng macOS"; ObjectID = "gw3-Ve-tj0"; */
+"gw3-Ve-tj0.title" = "Khởi động cùng macOS";
+
+/* Class = "NSTextFieldCell"; title = "Bảng mã:"; ObjectID = "kAU-32-upN"; */
+"kAU-32-upN.title" = "Bảng mã:";
+
+/* Class = "NSButtonCell"; title = "Bật bảng này khi khởi động"; ObjectID = "pJ5-3Z-zVo"; */
+"pJ5-3Z-zVo.title" = "Bật bảng này khi khởi động";
+
+/* Class = "NSButtonCell"; title = "Tiếng Việt"; ObjectID = "qSg-7a-q1T"; */
+"qSg-7a-q1T.title" = "Tiếng Việt";
+
+/* Class = "NSBox"; title = "Điều khiển"; ObjectID = "t0y-Jm-kod"; */
+"t0y-Jm-kod.title" = "Điều khiển";
+
+/* Class = "NSMenuItem"; title = "VNI"; ObjectID = "tv3-iD-nS9"; */
+"tv3-iD-nS9.title" = "VNI";
+
+/* Class = "NSMenuItem"; title = "Telex"; ObjectID = "y7i-dK-uIA"; */
+"y7i-dK-uIA.title" = "Telex";

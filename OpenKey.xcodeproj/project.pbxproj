@@ -1,0 +1,517 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 70;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		233C4A6E231F923D00DD7052 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233C4A6D231F923D00DD7052 /* AppKit.framework */; };
+		238519F821F1BF3C00E79A41 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238519F221F1B8E200E79A41 /* Foundation.framework */; };
+		238519FF21F1BF8A00E79A41 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238519FD21F1BF5100E79A41 /* EventKit.framework */; };
+		23851A0021F1BFA300E79A41 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238519FB21F1BF4900E79A41 /* Cocoa.framework */; };
+		23851A0121F1C1A400E79A41 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238519F921F1BF4400E79A41 /* CoreGraphics.framework */; };
+		23963B5022040C720097189E /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23963B4F22040C720097189E /* ServiceManagement.framework */; };
+		A534F32629D8B78100296F25 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23874B0F220160A500000BC8 /* Carbon.framework */; };
+		A7F0AB0C302EB9CE009787DC /* OpenKeyHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = A7F0AB05302EB9CE009787D5 /* OpenKeyHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A7F0AB0D302EB9CE009787DD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238519FB21F1BF4900E79A41 /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A7F0AB0B302EB9CE009787DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 232EDA4C21F1B33E0085D362 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7F0AB01302EB9CE009787D1;
+			remoteInfo = OpenKeyHelper;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		237559C4220417DD00FB8CB9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				A7F0AB0C302EB9CE009787DC /* OpenKeyHelper.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		232EDA5421F1B33E0085D362 /* OpenKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		233C4A6D231F923D00DD7052 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		2344220522F42F70009E47D4 /* OpenKey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenKey.entitlements; sourceTree = "<group>"; };
+		238519F221F1B8E200E79A41 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		238519F921F1BF4400E79A41 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		238519FB21F1BF4900E79A41 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		238519FD21F1BF5100E79A41 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		23874B0F220160A500000BC8 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		23963B4F22040C720097189E /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		23A984BE220ED07E000914A2 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		A7F0AB05302EB9CE009787D5 /* OpenKeyHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenKeyHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A7F0AA02302EB9CE009787C6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 232EDA5321F1B33E0085D362 /* OpenKey */;
+		};
+		A7F0AB09302EB9CE009787D9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A7F0AB01302EB9CE009787D1 /* OpenKeyHelper */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A7F0A9B6302EB9AE009787C3 /* engine */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = engine; sourceTree = "<group>"; };
+		A7F0A9C4302EB9CE009787C3 /* OpenKeyHelper */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (A7F0AB09302EB9CE009787D9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = OpenKeyHelper; sourceTree = "<group>"; };
+		A7F0AA01302EB9CE009787C5 /* ModernKey */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (A7F0AA02302EB9CE009787C6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ModernKey; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		232EDA5121F1B33E0085D362 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A534F32629D8B78100296F25 /* Carbon.framework in Frameworks */,
+				233C4A6E231F923D00DD7052 /* AppKit.framework in Frameworks */,
+				23963B5022040C720097189E /* ServiceManagement.framework in Frameworks */,
+				23851A0121F1C1A400E79A41 /* CoreGraphics.framework in Frameworks */,
+				23851A0021F1BFA300E79A41 /* Cocoa.framework in Frameworks */,
+				238519FF21F1BF8A00E79A41 /* EventKit.framework in Frameworks */,
+				238519F821F1BF3C00E79A41 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7F0AB03302EB9CE009787D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7F0AB0D302EB9CE009787DD /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		232EDA4B21F1B33E0085D362 = {
+			isa = PBXGroup;
+			children = (
+				A7F0AA01302EB9CE009787C5 /* ModernKey */,
+				A7F0A9B6302EB9AE009787C3 /* engine */,
+				A7F0A9C4302EB9CE009787C3 /* OpenKeyHelper */,
+				2344220522F42F70009E47D4 /* OpenKey.entitlements */,
+				238519F121F1B8E200E79A41 /* Frameworks */,
+				232EDA5521F1B33E0085D362 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		232EDA5521F1B33E0085D362 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				232EDA5421F1B33E0085D362 /* OpenKey.app */,
+				A7F0AB05302EB9CE009787D5 /* OpenKeyHelper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		238519F121F1B8E200E79A41 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				233C4A6D231F923D00DD7052 /* AppKit.framework */,
+				23A984BE220ED07E000914A2 /* IOKit.framework */,
+				23963B4F22040C720097189E /* ServiceManagement.framework */,
+				23874B0F220160A500000BC8 /* Carbon.framework */,
+				238519FD21F1BF5100E79A41 /* EventKit.framework */,
+				238519FB21F1BF4900E79A41 /* Cocoa.framework */,
+				238519F921F1BF4400E79A41 /* CoreGraphics.framework */,
+				238519F221F1B8E200E79A41 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		232EDA5321F1B33E0085D362 /* OpenKey */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 232EDA6821F1B33F0085D362 /* Build configuration list for PBXNativeTarget "OpenKey" */;
+			buildPhases = (
+				232EDA5021F1B33E0085D362 /* Sources */,
+				232EDA5121F1B33E0085D362 /* Frameworks */,
+				232EDA5221F1B33E0085D362 /* Resources */,
+				237559C4220417DD00FB8CB9 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A7F0AB0A302EB9CE009787DA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A7F0A9B6302EB9AE009787C3 /* engine */,
+				A7F0AA01302EB9CE009787C5 /* ModernKey */,
+			);
+			name = OpenKey;
+			productName = ModernKey;
+			productReference = 232EDA5421F1B33E0085D362 /* OpenKey.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A7F0AB01302EB9CE009787D1 /* OpenKeyHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7F0AB06302EB9CE009787D6 /* Build configuration list for PBXNativeTarget "OpenKeyHelper" */;
+			buildPhases = (
+				A7F0AB02302EB9CE009787D2 /* Sources */,
+				A7F0AB03302EB9CE009787D3 /* Frameworks */,
+				A7F0AB04302EB9CE009787D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A7F0A9C4302EB9CE009787C3 /* OpenKeyHelper */,
+			);
+			name = OpenKeyHelper;
+			productName = OpenKeyHelper;
+			productReference = A7F0AB05302EB9CE009787D5 /* OpenKeyHelper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		232EDA4C21F1B33E0085D362 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Tuyen Mai";
+				TargetAttributes = {
+					232EDA5321F1B33E0085D362 = {
+						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 232EDA4F21F1B33E0085D362 /* Build configuration list for PBXProject "OpenKey" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"vi-VN",
+			);
+			mainGroup = 232EDA4B21F1B33E0085D362;
+			productRefGroup = 232EDA5521F1B33E0085D362 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				232EDA5321F1B33E0085D362 /* OpenKey */,
+				A7F0AB01302EB9CE009787D1 /* OpenKeyHelper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		232EDA5221F1B33E0085D362 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7F0AB04302EB9CE009787D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		232EDA5021F1B33E0085D362 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7F0AB02302EB9CE009787D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A7F0AB0A302EB9CE009787DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A7F0AB01302EB9CE009787D1 /* OpenKeyHelper */;
+			targetProxy = A7F0AB0B302EB9CE009787DB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		232EDA6621F1B33F0085D362 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		232EDA6721F1B33F0085D362 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		232EDA6921F1B33F0085D362 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 48;
+				DEVELOPMENT_TEAM = J299H8YWF8;
+				HEADER_SEARCH_PATHS = engine;
+				INFOPLIST_FILE = ModernKey/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 2.0.6;
+				PRODUCT_BUNDLE_IDENTIFIER = com.utc.open.key;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ModernKey/OpenKey-Bridging-Header.h";
+				SWIFT_OBJC_INTEROP_MODE = objcxx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		232EDA6A21F1B33F0085D362 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 48;
+				DEVELOPMENT_TEAM = J299H8YWF8;
+				HEADER_SEARCH_PATHS = engine;
+				INFOPLIST_FILE = ModernKey/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 2.0.6;
+				PRODUCT_BUNDLE_IDENTIFIER = com.utc.open.key;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ModernKey/OpenKey-Bridging-Header.h";
+				SWIFT_OBJC_INTEROP_MODE = objcxx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A7F0AB07302EB9CE009787D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 48;
+				DEVELOPMENT_TEAM = J299H8YWF8;
+				INFOPLIST_FILE = OpenKeyHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 2.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.utc.open.key.helper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A7F0AB08302EB9CE009787D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 48;
+				DEVELOPMENT_TEAM = J299H8YWF8;
+				INFOPLIST_FILE = OpenKeyHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 2.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.utc.open.key.helper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		232EDA4F21F1B33E0085D362 /* Build configuration list for PBXProject "OpenKey" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				232EDA6621F1B33F0085D362 /* Debug */,
+				232EDA6721F1B33F0085D362 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		232EDA6821F1B33F0085D362 /* Build configuration list for PBXNativeTarget "OpenKey" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				232EDA6921F1B33F0085D362 /* Debug */,
+				232EDA6A21F1B33F0085D362 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7F0AB06302EB9CE009787D6 /* Build configuration list for PBXNativeTarget "OpenKeyHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7F0AB07302EB9CE009787D7 /* Debug */,
+				A7F0AB08302EB9CE009787D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 232EDA4C21F1B33E0085D362 /* Project object */;
+}

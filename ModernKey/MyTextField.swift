@@ -1,0 +1,72 @@
+import Cocoa
+import Carbon
+
+@objc protocol MyTextFieldDelegate: AnyObject {
+    @objc optional func onMyTextFieldKeyChange(_ keyCode: UInt16, character: UInt16)
+}
+
+@objc(MyTextField)
+class MyTextField: NSTextField, NSTextFieldDelegate {
+    weak var parent: MyTextFieldDelegate?
+    var lastKeyCode: UInt16 = 0
+    var lastKeyChar: UInt16 = 0
+    private var eventMonitor: Any?
+
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
+    }
+
+    override func becomeFirstResponder() -> Bool {
+        let okToChange = super.becomeFirstResponder()
+        if okToChange {
+            self.setKeyboardFocusRingNeedsDisplay(self.bounds)
+            
+            if eventMonitor == nil {
+                eventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
+                    self?.lastKeyCode = UInt16(event.keyCode)
+                    if let firstChar = event.characters?.utf16.first {
+                        self?.lastKeyChar = firstChar
+                    }
+                    return event
+                }
+            }
+        }
+        return okToChange
+    }
+
+    override func textDidEndEditing(_ notification: Notification) {
+        super.textDidEndEditing(notification)
+        if let monitor = eventMonitor {
+            NSEvent.removeMonitor(monitor)
+            eventMonitor = nil
+        }
+    }
+
+    override func textDidChange(_ notification: Notification) {
+        if lastKeyCode == UInt16(kVK_Space) {
+            self.stringValue = "Space"
+            parent?.onMyTextFieldKeyChange?(UInt16(kVK_Space), character: UInt16(kVK_Space))
+        } else if lastKeyCode == UInt16(kVK_Delete) || lastKeyCode == UInt16(kVK_ForwardDelete) {
+            self.stringValue = ""
+            parent?.onMyTextFieldKeyChange?(0xFE, character: 0xFE)
+        } else {
+            self.stringValue = ""
+            parent?.onMyTextFieldKeyChange?(lastKeyCode, character: lastKeyChar)
+            if let scalar = UnicodeScalar(lastKeyChar) {
+                self.stringValue = String(Character(scalar))
+            }
+        }
+    }
+
+    func setTextByChar(_ chr: UInt16) {
+        if chr == UInt16(kVK_Space) {
+            self.stringValue = "Space"
+        } else if chr == 0xFE {
+            self.stringValue = ""
+        } else {
+            if let scalar = UnicodeScalar(chr) {
+                self.stringValue = String(Character(scalar))
+            }
+        }
+    }
+}
