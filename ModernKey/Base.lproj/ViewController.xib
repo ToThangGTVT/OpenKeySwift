@@ -869,71 +869,21 @@ Nếu bạn gõ "KO" sẽ thành "KHÔNG"</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7u-GE-f2u">
-                                <rect key="frame" x="18" y="128" width="72" height="72"/>
+                                <rect key="frame" x="18" y="122" width="76" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="Icon" id="7jC-zc-3Na"/>
                             </imageView>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rpD-yE-eVi">
-                                <rect key="frame" x="104" y="178" width="440" height="20"/>
+                                <rect key="frame" x="110" y="170" width="470" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="left" title="OpenKey - Bộ gõ Tiếng Việt nguồn mở đa nền tảng" id="ITy-e9-YzB">
-                                    <font key="font" metaFont="systemBold" size="14"/>
+                                    <font key="font" metaFont="systemBold" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0tV-iH-sRD">
-                                <rect key="frame" x="104" y="153" width="70" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Trang chủ" id="7b8-gW-wsV">
-                                    <font key="font" metaFont="system" size="12"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField toolTip="Mở trang chủ OpenKey" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d82-rI-Bnp">
-                                <rect key="frame" x="180" y="153" width="200" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <gestureRecognizers>
-                                    <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="BnW-Cf-Dva">
-                                        <connections>
-                                            <action selector="onHomePageLink:" target="-2" id="J1s-3D-yB3"/>
-                                        </connections>
-                                    </clickGestureRecognizer>
-                                </gestureRecognizers>
-                                <textFieldCell key="cell" lineBreakMode="truncatingTail" continuous="YES" sendsActionOnEndEditing="YES" title="https://open-key.org" id="nHn-YP-grx">
-                                    <font key="font" metaFont="system" size="12"/>
-                                    <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Efo-0V-TJT">
-                                <rect key="frame" x="104" y="131" width="70" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Facebook" id="cSu-Ye-zUv">
-                                    <font key="font" metaFont="system" size="12"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField toolTip="Mở fanpage OpenKey" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lAj-la-DBu">
-                                <rect key="frame" x="180" y="131" width="280" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <gestureRecognizers>
-                                    <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="RgF-ls-7wI">
-                                        <connections>
-                                            <action selector="onFanpageLink:" target="-2" id="7Sa-ug-pQJ"/>
-                                        </connections>
-                                    </clickGestureRecognizer>
-                                </gestureRecognizers>
-                                <textFieldCell key="cell" lineBreakMode="truncatingTail" continuous="YES" sendsActionOnEndEditing="YES" title="https://www.facebook.com/OpenKeyVN" id="Eab-Ws-sUb">
-                                    <font key="font" metaFont="system" size="12"/>
-                                    <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bXh-ai-gk3">
-                                <rect key="frame" x="18" y="100" width="574" height="18"/>
+                                <rect key="frame" x="110" y="146" width="470" height="18"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="left" title="Phiên bản: 1.0, cập nhật ngày 1/1/2019" id="Ntd-DR-Tpa">
                                     <font key="font" metaFont="system" size="12"/>
@@ -942,7 +892,7 @@ Nếu bạn gõ "KO" sẽ thành "KHÔNG"</string>
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qlz-Sz-VDa">
-                                <rect key="frame" x="18" y="42" width="574" height="52"/>
+                                <rect key="frame" x="18" y="66" width="574" height="52"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" alignment="left" id="B3Z-2e-1t0">
                                     <font key="font" metaFont="system" size="12"/>
@@ -952,7 +902,7 @@ Nếu bạn gõ "KO" sẽ thành "KHÔNG"</string>
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="umA-Yh-Pbd">
-                                <rect key="frame" x="18" y="17" width="150" height="17"/>
+                                <rect key="frame" x="18" y="35" width="150" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Mai Vũ Tuyên © 2019 - " id="CwO-3m-MrD">
                                     <font key="font" metaFont="system" size="12"/>
@@ -961,7 +911,7 @@ Nếu bạn gõ "KO" sẽ thành "KHÔNG"</string>
                                 </textFieldCell>
                             </textField>
                             <textField toolTip="Gửi email cho tác giả" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hr-xh-URk">
-                                <rect key="frame" x="170" y="17" width="200" height="17"/>
+                                <rect key="frame" x="172" y="35" width="220" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <gestureRecognizers>
                                     <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="pAB-RE-9oV">
@@ -977,7 +927,7 @@ Nếu bạn gõ "KO" sẽ thành "KHÔNG"</string>
                                 </textFieldCell>
                             </textField>
                             <button toolTip="Xem mã nguồn trên GitHub" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V8B-er-EO9">
-                                <rect key="frame" x="452" y="10" width="140" height="32"/>
+                                <rect key="frame" x="452" y="24" width="140" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Mã nguồn..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fQH-k0-0aa">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

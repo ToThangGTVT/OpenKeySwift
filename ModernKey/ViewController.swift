@@ -559,17 +559,7 @@ class ViewController: NSViewController, MyTextFieldDelegate {
         }
     }
     
-    @IBAction func onHomePageLink(_ sender: Any) {
-        if let url = URL(string: "https://open-key.org") {
-            NSWorkspace.shared.open(url)
-        }
-    }
     
-    @IBAction func onFanpageLink(_ sender: Any) {
-        if let url = URL(string: "https://www.facebook.com/OpenKeyVN") {
-            NSWorkspace.shared.open(url)
-        }
-    }
     
     @IBAction func onEmailLink(_ sender: Any) {
         if let url = URL(string: "mailto:maivutuyen.91@gmail.com") {
