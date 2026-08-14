@@ -200,7 +200,19 @@ func OpenKeyInit() {
     if convertToolHotKey == 0 {
         convertToolHotKey = EMPTY_HOTKEY
     }
+    
+    // init clipboard hotkey
+    clipboardHotKey = Int32(truncatingIfNeeded: prefs.integer(forKey: clipboardHotKeyKey))
+    if clipboardHotKey == 0 {
+        // Default Cmd+Shift+V
+        clipboardHotKey = (Int32(118) << 24) | 0x09
+        clipboardHotKey |= 0x400
+        clipboardHotKey |= 0x800
+    }
 }
+
+let clipboardHotKeyKey = "ClipboardHotkeyData"
+var clipboardHotKey: Int32 = 0
 
 // MARK: - Utilities
 
@@ -708,6 +720,30 @@ func OpenKeyCallback(proxy: CGEventTapProxy,
     _flag = event.flags
     _keycode = CGKeyCode(event.getIntegerValueField(.keyboardEventKeycode))
 
+    // While the clipboard picker is up it owns the keyboard. It never activates
+    // OpenKey — that would pull focus off the app being typed into — so the keys
+    // have to be handed to it from here. Modifier changes still pass through.
+    if ClipboardPanel.shared.isOpen {
+        if type == .keyUp { return nil }
+        if type == .keyDown {
+            // Pressing the hotkey again closes it.
+            if GET_SWITCH_KEY(clipboardHotKey) == _keycode,
+               checkHotKey(clipboardHotKey, GET_SWITCH_KEY(clipboardHotKey) != 0xFE) {
+                ClipboardPanel.shared.dismiss()
+                _lastFlag = []
+                _hasJustUsedHotKey = true
+                return nil
+            }
+            var length = 0
+            var buffer = [UniChar](repeating: 0, count: 8)
+            event.keyboardGetUnicodeString(maxStringLength: 8, actualStringLength: &length, unicodeString: &buffer)
+            let characters = String(utf16CodeUnits: buffer, count: length)
+            if ClipboardPanel.shared.handleKeyDown(keyCode: _keycode, characters: characters, flags: _flag) {
+                return nil
+            }
+        }
+    }
+
     if type == .keyDown && vPerformLayoutCompat != 0 {
         // If conversion fails, use current keycode
         _keycode = ConvertEventToKeyboardLayoutCompatKeyCode(event, _keycode)
@@ -728,7 +764,7 @@ func OpenKeyCallback(proxy: CGEventTapProxy,
 
     // switch language shortcut; convert hotkey
     if type == .keyDown {
-        if GET_SWITCH_KEY(vSwitchKeyStatus) != _keycode && GET_SWITCH_KEY(convertToolHotKey) != _keycode {
+        if GET_SWITCH_KEY(vSwitchKeyStatus) != _keycode && GET_SWITCH_KEY(convertToolHotKey) != _keycode && GET_SWITCH_KEY(clipboardHotKey) != _keycode {
             _lastFlag = []
         } else {
             if GET_SWITCH_KEY(vSwitchKeyStatus) == _keycode &&
@@ -741,6 +777,13 @@ func OpenKeyCallback(proxy: CGEventTapProxy,
             if GET_SWITCH_KEY(convertToolHotKey) == _keycode &&
                 checkHotKey(convertToolHotKey, GET_SWITCH_KEY(convertToolHotKey) != 0xFE) {
                 (NSApp.delegate as? AppDelegate)?.onQuickConvert()
+                _lastFlag = []
+                _hasJustUsedHotKey = true
+                return nil
+            }
+            if GET_SWITCH_KEY(clipboardHotKey) == _keycode &&
+                checkHotKey(clipboardHotKey, GET_SWITCH_KEY(clipboardHotKey) != 0xFE) {
+                (NSApp.delegate as? AppDelegate)?.showClipboardHistory()
                 _lastFlag = []
                 _hasJustUsedHotKey = true
                 return nil
@@ -761,6 +804,12 @@ func OpenKeyCallback(proxy: CGEventTapProxy,
             if checkHotKey(convertToolHotKey, GET_SWITCH_KEY(convertToolHotKey) != 0xFE) {
                 _lastFlag = []
                 (NSApp.delegate as? AppDelegate)?.onQuickConvert()
+                _hasJustUsedHotKey = true
+                return nil
+            }
+            if checkHotKey(clipboardHotKey, GET_SWITCH_KEY(clipboardHotKey) != 0xFE) {
+                _lastFlag = []
+                (NSApp.delegate as? AppDelegate)?.showClipboardHistory()
                 _hasJustUsedHotKey = true
                 return nil
             }

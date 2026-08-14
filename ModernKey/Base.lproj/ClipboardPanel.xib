@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ClipboardPanel" customModule="OpenKey" customModuleProvider="target">
+            <connections>
+                <outlet property="emptyLabel" destination="CLP-em-lbl" id="CLP-em-out"/>
+                <outlet property="panel" destination="CLP-pn-001" id="CLP-pn-out"/>
+                <outlet property="previewLabel" destination="CLP-pv-lbl" id="CLP-pv-lo"/>
+                <outlet property="previewScroll" destination="CLP-pv-scr" id="CLP-pv-so"/>
+                <outlet property="previewView" destination="CLP-pv-vew" id="CLP-pv-vo"/>
+                <outlet property="searchField" destination="CLP-se-fld" id="CLP-se-out"/>
+                <outlet property="tableView" destination="CLP-tb-vew" id="CLP-tb-out"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="none" id="CLP-pn-001" customClass="NonFocusPanel" customModule="OpenKey" customModuleProvider="target">
+            <windowStyleMask key="styleMask" nonactivatingPanel="YES"/>
+            <rect key="contentRect" x="0.0" y="0.0" width="446" height="380"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1512" height="948"/>
+            <visualEffectView key="contentView" wantsLayer="YES" blendingMode="behindWindow" material="menu" state="active" id="CLP-bg-vew">
+                <rect key="frame" x="0.0" y="0.0" width="446" height="380"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" translatesAutoresizingMaskIntoConstraints="NO" id="CLP-sc-vew">
+                        <rect key="frame" x="0.0" y="30" width="446" height="305"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <clipView key="contentView" drawsBackground="NO" id="CLP-cl-vew">
+                            <rect key="frame" x="1" y="1" width="444" height="303"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="26" viewBased="YES" id="CLP-tb-vew">
+                                    <rect key="frame" x="0.0" y="0.0" width="444" height="303"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="gridColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <tableColumns>
+                                        <tableColumn width="419" minWidth="40" maxWidth="10000" id="CLP-tb-col">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="item">
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Text Cell" id="CLP-tb-dat">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <prototypeCellViews>
+                                                <tableCellView identifier="ClipboardRow" id="CLP-ro-vew">
+                                                    <rect key="frame" x="0.0" y="0.0" width="431" height="26"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                                    <subviews>
+                                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CLP-ro-txt">
+                                                            <rect key="frame" x="10" y="5" width="377" height="16"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" id="CLP-ro-tcl">
+                                                                <font key="font" metaFont="system"/>
+                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" tag="7" translatesAutoresizingMaskIntoConstraints="NO" id="CLP-ro-sct">
+                                                            <rect key="frame" x="387" y="5" width="34" height="16"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" id="CLP-ro-scl">
+                                                                <font key="font" metaFont="cellTitle"/>
+                                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                    </subviews>
+                                                    <connections>
+                                                        <outlet property="textField" destination="CLP-ro-txt" id="CLP-ro-out"/>
+                                                    </connections>
+                                                </tableCellView>
+                                            </prototypeCellViews>
+                                        </tableColumn>
+                                    </tableColumns>
+                                    <connections>
+                                        <action selector="onRowClicked:" target="-2" id="CLP-tb-act"/>
+                                        <outlet property="dataSource" destination="-2" id="CLP-tb-dsr"/>
+                                        <outlet property="delegate" destination="-2" id="CLP-tb-dlg"/>
+                                    </connections>
+                                </tableView>
+                            </subviews>
+                            <nil key="backgroundColor"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="CLP-sc-hor">
+                            <rect key="frame" x="1" y="287" width="444" height="17"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="CLP-sc-ver">
+                            <rect key="frame" x="-100" y="-100" width="18" height="87"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <textField hidden="YES" wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CLP-em-lbl">
+                        <rect key="frame" x="0.0" y="164" width="446" height="17"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="center" title="Chưa có gì trong lịch sử" id="CLP-em-cel">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CLP-hi-lbl">
+                        <rect key="frame" x="0.0" y="8" width="446" height="16"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="center" title="↑↓ chọn · ⏎ dán · esc đóng" id="CLP-hi-cel">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textFieldCell>
+                    </textField>
+                    <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CLP-se-fld">
+                        <rect key="frame" x="8" y="346" width="430" height="24"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <searchFieldCell key="cell" controlSize="large" lineBreakMode="clipping" borderStyle="bezel" placeholderString="Gõ để tìm..." bezelStyle="round" sendsWholeSearchString="YES" id="CLP-se-cel">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </searchFieldCell>
+                    </searchField>
+                </subviews>
+            </visualEffectView>
+            <point key="canvasLocation" x="312" y="20"/>
+        </window>
+        <customView id="CLP-pv-vew" customClass="ClipboardPreviewView" customModule="OpenKey" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="360" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <scrollView autohidesScrollers="YES" horizontalLineScroll="16" horizontalPageScroll="10" verticalLineScroll="16" verticalPageScroll="10" translatesAutoresizingMaskIntoConstraints="NO" id="CLP-pv-scr">
+                    <rect key="frame" x="12" y="10" width="336" height="40"/>
+                    <clipView key="contentView" drawsBackground="NO" id="CLP-pv-clp">
+                        <rect key="frame" x="1" y="1" width="317" height="38"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CLP-pv-lbl">
+                                <rect key="frame" x="0.0" y="0.0" width="317" height="40"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <textFieldCell key="cell" id="CLP-pv-cel">
+                                    <font key="font" metaFont="cellTitle"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="CLP-pv-sh">
+                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="CLP-pv-sv">
+                        <rect key="frame" x="318" y="1" width="17" height="38"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="CLP-pv-scr" secondAttribute="bottom" constant="10" id="9Bz-iN-NLO"/>
+                <constraint firstAttribute="trailing" secondItem="CLP-pv-scr" secondAttribute="trailing" constant="12" id="ToH-eH-aG0"/>
+                <constraint firstItem="CLP-pv-scr" firstAttribute="leading" secondItem="CLP-pv-vew" secondAttribute="leading" constant="12" id="l9b-uI-PDn"/>
+                <constraint firstItem="CLP-pv-scr" firstAttribute="top" secondItem="CLP-pv-vew" secondAttribute="top" constant="10" id="r2e-CY-bnd"/>
+            </constraints>
+            <point key="canvasLocation" x="601" y="180"/>
+        </customView>
+    </objects>
+</document>

@@ -22,3 +22,7 @@ xcuserdata/
 
 # Local tooling config
 .claude/settings.local.json
+
+# Local build output from command-line xcodebuild runs
+buildDerivedData/
+ibtool.log

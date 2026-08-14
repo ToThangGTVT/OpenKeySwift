@@ -7,16 +7,18 @@ weak var viewController: ViewController?
 class ViewController: NSViewController, MyTextFieldDelegate {
 
     @IBOutlet weak var viewParent: NSView!
-    @IBOutlet weak var tabbuttonPrimary: NSButton!
-    @IBOutlet weak var tabbuttonMacro: NSButton!
-    @IBOutlet weak var tabbuttonSystem: NSButton!
-    @IBOutlet weak var tabbuttonSound: NSButton!
-    @IBOutlet weak var tabbuttonInfo: NSButton!
-    @IBOutlet weak var tabviewPrimary: NSBox!
-    @IBOutlet weak var tabviewMacro: NSBox!
-    @IBOutlet weak var tabviewSystem: NSBox!
-    @IBOutlet weak var tabviewSound: NSBox!
-    @IBOutlet weak var tabviewInfo: NSBox!
+    @IBOutlet weak var tabSegment: NSSegmentedControl!
+    /// Holds whichever page is currently on screen.
+    @IBOutlet weak var tabContainer: NSView!
+
+    // The pages live outside the main view as top-level nib objects — one
+    // editable canvas each — so these outlets must hold them strongly.
+    @IBOutlet var tabviewPrimary: NSBox!
+    @IBOutlet var tabviewMacro: NSBox!
+    @IBOutlet var tabviewSystem: NSBox!
+    @IBOutlet var tabviewSound: NSBox!
+    @IBOutlet var tabviewClipboard: NSBox!
+    @IBOutlet var tabviewInfo: NSBox!
     
     @IBOutlet weak var popupInputType: NSPopUpButton!
     @IBOutlet weak var popupCode: NSPopUpButton!
@@ -86,20 +88,32 @@ class ViewController: NSViewController, MyTextFieldDelegate {
     @IBOutlet weak var KeySoundSpecialKeys: NSButton!
     @IBOutlet weak var KeySoundRelease: NSButton!
 
+    @IBOutlet weak var ClipboardEnable: NSButton!
+    @IBOutlet weak var ClipboardAutoPaste: NSButton!
+    @IBOutlet weak var ClipboardHistorySize: NSPopUpButton!
+    @IBOutlet weak var ClipboardSizeLabel: NSTextField!
+    @IBOutlet weak var ClipboardHotkeyLabel: NSTextField!
+    @IBOutlet weak var ClipboardSwitchControl: NSButton!
+    @IBOutlet weak var ClipboardSwitchOption: NSButton!
+    @IBOutlet weak var ClipboardSwitchCommand: NSButton!
+    @IBOutlet weak var ClipboardSwitchShift: NSButton!
+    @IBOutlet weak var ClipboardSwitchKey: MyTextField!
+    @IBOutlet weak var ClipboardClearButton: NSButton!
+    @IBOutlet weak var ClipboardHelpLabel: NSTextField!
+
     var tabviews: [NSBox] = []
-    var tabbuttons: [NSButton] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         viewController = self
         CustomSwitchKey.parent = self
+        ClipboardSwitchKey.parent = self
         appOK.isHidden = true
         permissionWarning.isHidden = true
         retryButton.isEnabled = false
 
-        tabviews = [tabviewPrimary, tabviewMacro, tabviewSystem, tabviewSound, tabviewInfo]
-        tabbuttons = [tabbuttonPrimary, tabbuttonMacro, tabbuttonSystem, tabbuttonSound, tabbuttonInfo]
+        tabviews = [tabviewPrimary, tabviewMacro, tabviewSystem, tabviewSound, tabviewClipboard, tabviewInfo]
 
         showTab(0)
 
@@ -134,29 +148,33 @@ class ViewController: NSViewController, MyTextFieldDelegate {
         initKey()
     }
     
+    /// Nothing is shown while the app is working — only the missing-permission warning.
     func initKey() {
         DispatchQueue.main.async {
-            if !OpenKeyManager.initEventTap() {
-                // self.permissionWarning.isHidden = false
-                // self.retryButton.isEnabled = true
-            } else {
-                // self.appOK.isHidden = false
-            }
+            let ok = OpenKeyManager.initEventTap()
+            self.appOK.isHidden = true
+            self.permissionWarning.isHidden = ok
+            self.retryButton.isEnabled = !ok
         }
     }
     
-    /// The tab pages all share the same frame; only the selected one is visible.
+    /// Swaps the selected page into the container. The pages are detached
+    /// top-level nib objects, so only one is in the view hierarchy at a time.
     func showTab(_ index: Int) {
-        for (i, box) in tabviews.enumerated() {
-            box.isHidden = (i != index)
+        guard tabviews.indices.contains(index) else { return }
+        let page = tabviews[index]
+        if page.superview !== tabContainer {
+            tabContainer.subviews.forEach { $0.removeFromSuperview() }
+            page.isHidden = false
+            page.frame = tabContainer.bounds
+            page.autoresizingMask = [.width, .height]
+            tabContainer.addSubview(page)
         }
-        for (i, button) in tabbuttons.enumerated() {
-            button.state = (i == index) ? .on : .off
-        }
+        tabSegment?.selectedSegment = index
     }
-    
-    @IBAction func onTabButton(_ sender: NSButton) {
-        showTab(sender.tag)
+
+    @IBAction func onTabSegment(_ sender: NSSegmentedControl) {
+        showTab(sender.selectedSegment)
     }
     
     @IBAction func onInputTypeChanged(_ sender: NSPopUpButton) {
@@ -270,7 +288,15 @@ class ViewController: NSViewController, MyTextFieldDelegate {
         UserDefaults.standard.set(vSwitchKeyStatus, forKey: "SwitchKeyStatus")
     }
     
-    func onMyTextFieldKeyChange(_ keyCode: UInt16, character: UInt16) {
+    func myTextField(_ field: MyTextField, didChangeKeyCode keyCode: UInt16, character: UInt16) {
+        if field === ClipboardSwitchKey {
+            clipboardHotKey &= ~0xFF
+            clipboardHotKey |= Int32(keyCode)
+            clipboardHotKey &= 0x00FFFFFF
+            clipboardHotKey |= (Int32(character) << 24)
+            UserDefaults.standard.set(clipboardHotKey, forKey: clipboardHotKeyKey)
+            return
+        }
         vSwitchKeyStatus &= ~0xFF
         vSwitchKeyStatus |= Int32(keyCode)
         vSwitchKeyStatus &= 0x00FFFFFF
@@ -342,6 +368,87 @@ class ViewController: NSViewController, MyTextFieldDelegate {
     @IBAction func onKeySoundRelease(_ sender: NSButton) {
         vKeySoundRelease = Int32(setCustomValue(sender, keyToSet: "vKeySoundRelease"))
         KeySoundPlayer.shared.preview()
+    }
+
+    // MARK: - Clipboard history
+
+    /// Values behind the "Giới hạn lịch sử" popup, in menu-item order.
+    private let clipboardHistorySizes = [10, 30, 50, 100, 500]
+
+    /// Greys out the clipboard settings while the feature is off.
+    private func updateClipboardControls() {
+        let on = UserDefaults.standard.bool(forKey: ClipboardManager.shared.enableKey)
+        ClipboardAutoPaste?.isEnabled = on
+        ClipboardHistorySize?.isEnabled = on
+        ClipboardSizeLabel?.isEnabled = on
+        ClipboardHotkeyLabel?.isEnabled = on
+        ClipboardSwitchControl?.isEnabled = on
+        ClipboardSwitchOption?.isEnabled = on
+        ClipboardSwitchCommand?.isEnabled = on
+        ClipboardSwitchShift?.isEnabled = on
+        ClipboardSwitchKey?.isEnabled = on
+        ClipboardClearButton?.isEnabled = on
+        ClipboardHelpLabel?.isEnabled = on
+    }
+
+    private func setClipboardModifier(_ mask: Int32, _ sender: NSButton) {
+        if sender.state == .on {
+            clipboardHotKey |= mask
+        } else {
+            clipboardHotKey &= ~mask
+        }
+        UserDefaults.standard.set(clipboardHotKey, forKey: clipboardHotKeyKey)
+    }
+
+    @IBAction func onClipboardEnable(_ sender: NSButton) {
+        let on = sender.state == .on
+        UserDefaults.standard.set(on, forKey: ClipboardManager.shared.enableKey)
+        if on {
+            ClipboardManager.shared.start()
+        } else {
+            ClipboardManager.shared.stop()
+        }
+        updateClipboardControls()
+    }
+
+    @IBAction func onClipboardAutoPaste(_ sender: NSButton) {
+        UserDefaults.standard.set(sender.state == .on, forKey: ClipboardManager.shared.autoPasteKey)
+    }
+
+    @IBAction func onClipboardHistorySize(_ sender: NSPopUpButton) {
+        let index = max(0, min(clipboardHistorySizes.count - 1, sender.indexOfSelectedItem))
+        UserDefaults.standard.set(clipboardHistorySizes[index], forKey: ClipboardManager.shared.historySizeKey)
+        ClipboardManager.shared.trimHistory()
+    }
+
+    @IBAction func onClipboardControlSwitchKey(_ sender: NSButton) {
+        setClipboardModifier(0x100, sender)
+    }
+
+    @IBAction func onClipboardOptionSwitchKey(_ sender: NSButton) {
+        setClipboardModifier(0x200, sender)
+    }
+
+    @IBAction func onClipboardCommandSwitchKey(_ sender: NSButton) {
+        setClipboardModifier(0x400, sender)
+    }
+
+    @IBAction func onClipboardShiftSwitchKey(_ sender: NSButton) {
+        setClipboardModifier(0x800, sender)
+    }
+
+    @IBAction func onClipboardClearHistory(_ sender: Any) {
+        let alert = NSAlert()
+        alert.messageText = "Xoá toàn bộ lịch sử clipboard?"
+        alert.informativeText = "Thao tác này không thể hoàn tác."
+        alert.addButton(withTitle: "Xoá")
+        alert.addButton(withTitle: "Huỷ")
+        guard let window = self.view.window else { return }
+        alert.beginSheetModal(for: window) { returnCode in
+            if returnCode == .alertFirstButtonReturn {
+                ClipboardManager.shared.clearHistory()
+            }
+        }
     }
 
     @IBAction func onSendKeyStepByStep(_ sender: Any) {
@@ -534,6 +641,18 @@ class ViewController: NSViewController, MyTextFieldDelegate {
         KeySoundSpecialKeys?.state = vKeySoundSpecialKeys != 0 ? .on : .off
         KeySoundRelease?.state = vKeySoundRelease != 0 ? .on : .off
         updateKeySoundControls()
+
+        let defaults = UserDefaults.standard
+        ClipboardEnable?.state = defaults.bool(forKey: ClipboardManager.shared.enableKey) ? .on : .off
+        ClipboardAutoPaste?.state = defaults.bool(forKey: ClipboardManager.shared.autoPasteKey) ? .on : .off
+        let historySize = defaults.integer(forKey: ClipboardManager.shared.historySizeKey)
+        ClipboardHistorySize?.selectItem(at: clipboardHistorySizes.firstIndex(of: historySize) ?? 2)
+        ClipboardSwitchControl?.state = (clipboardHotKey & 0x100) != 0 ? .on : .off
+        ClipboardSwitchOption?.state = (clipboardHotKey & 0x200) != 0 ? .on : .off
+        ClipboardSwitchCommand?.state = (clipboardHotKey & 0x400) != 0 ? .on : .off
+        ClipboardSwitchShift?.state = (clipboardHotKey & 0x800) != 0 ? .on : .off
+        ClipboardSwitchKey?.setTextByChar(UInt16((clipboardHotKey >> 24) & 0xFF))
+        updateClipboardControls()
 
         CustomSwitchControl?.state = (vSwitchKeyStatus & 0x100) != 0 ? .on : .off
         CustomSwitchOption?.state = (vSwitchKeyStatus & 0x200) != 0 ? .on : .off
