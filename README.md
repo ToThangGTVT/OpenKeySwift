@@ -1,4 +1,4 @@
-# OpenKeySwift - Bộ gõ Tiếng Việt hiện đại cho macOS với engine đc lấy từ OpenKey
+# OpenKeySwift - Bộ gõ Tiếng Việt hiện đại cho macOS với engine được lấy từ OpenKey
 
 
 <img width="320" height="447" alt="Screenshot 2026-08-15 at 11 40 05" src="https://github.com/user-attachments/assets/0c3ea881-24d1-4d6e-89ef-a1c28f39c8f7" />
