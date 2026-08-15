@@ -26,3 +26,4 @@ xcuserdata/
 # Local build output from command-line xcodebuild runs
 buildDerivedData/
 ibtool.log
+.swift-cache/
