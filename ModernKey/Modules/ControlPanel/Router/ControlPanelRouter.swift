@@ -20,6 +20,10 @@ final class ControlPanelRouter: ControlPanelRouterProtocol {
         AppRouter.shared.openAboutWindow()
     }
     
+    func openAppInputModeWindow() {
+        AppRouter.shared.openAppInputModeWindow()
+    }
+    
     func showUpdateAlert(needUpdating: Bool, newVersion: String, parentWindow: NSWindow?, confirmUpdate: @escaping () -> Void) {
         let alert = NSAlert()
         alert.messageText = needUpdating ? "OpenKeySwift có phiên bản mới (\(newVersion)), bạn có muốn cập nhật không?" : "Bạn đang dùng phiên bản mới nhất!"

@@ -277,6 +277,10 @@ final class ControlPanelPresenter: ControlPanelPresenterProtocol {
     func didTapOpenConvertToolWindow() {
         router?.openConvertToolWindow()
     }
+    
+    func didTapOpenAppInputModeWindow() {
+        router?.openAppInputModeWindow()
+    }
 }
 
 // MARK: - Interactor Output

@@ -154,6 +154,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         theMenu.addItem(withTitle: "Bảng điều khiển...", action: #selector(onControlPanelSelected), keyEquivalent: "")
         theMenu.addItem(withTitle: "Gõ tắt...", action: #selector(onMacroSelected), keyEquivalent: "")
+        theMenu.addItem(withTitle: "Chế độ gõ theo ứng dụng...", action: #selector(onAppInputModeSelected), keyEquivalent: "")
         theMenu.addItem(withTitle: "Giới thiệu", action: #selector(onAboutSelected), keyEquivalent: "")
         theMenu.addItem(NSMenuItem.separator())
         
@@ -327,6 +328,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc func onMacroSelected() {
         router.openMacroWindow()
+    }
+
+    @objc func onAppInputModeSelected() {
+        router.openAppInputModeWindow()
     }
 
     @objc func onAboutSelected() {

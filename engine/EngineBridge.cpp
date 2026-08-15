@@ -139,6 +139,26 @@ void OK_SetAppInputMethodStatus(const char* bundleId, int language) {
     setAppInputMethodStatus(string(bundleId ? bundleId : ""), language);
 }
 
+void OK_RemoveAppInputMethodStatus(const char* bundleId) {
+    removeAppInputMethodStatus(string(bundleId ? bundleId : ""));
+}
+
+void OK_ClearAllAppInputMethodStatus(void) {
+    clearAllAppInputMethodStatus();
+}
+
+int OK_GetSmartSwitchKeyCount(void) {
+    return getSmartSwitchKeyCount();
+}
+
+const char* OK_GetSmartSwitchKeyBundleId(int index) {
+    return getSmartSwitchKeyBundleId(index);
+}
+
+int OK_GetSmartSwitchKeyLanguage(int index) {
+    return getSmartSwitchKeyLanguage(index);
+}
+
 #pragma mark - convert tool
 
 const char* OK_ConvertUtil(const char* source) {

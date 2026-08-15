@@ -47,12 +47,16 @@ uint16_t  OK_UnicodeCompoundMark(int index);
 void      OK_InitMacroMap(const uint8_t* data, int size);
 void      OK_OnTableCodeChange(void);
 
-/* ---- smart switch key ---- */
 void      OK_InitSmartSwitchKey(const uint8_t* data, int size);
 /* Returns a pointer to an internal buffer valid until the next call. */
 const uint8_t* OK_SmartSwitchKeySaveData(int* outLength);
 int       OK_GetAppInputMethodStatus(const char* bundleId, int currentInputMethod);
 void      OK_SetAppInputMethodStatus(const char* bundleId, int language);
+void      OK_RemoveAppInputMethodStatus(const char* bundleId);
+void      OK_ClearAllAppInputMethodStatus(void);
+int       OK_GetSmartSwitchKeyCount(void);
+const char* OK_GetSmartSwitchKeyBundleId(int index);
+int       OK_GetSmartSwitchKeyLanguage(int index);
 
 /* ---- convert tool ---- */
 /* Returns a pointer to an internal buffer valid until the next call. */

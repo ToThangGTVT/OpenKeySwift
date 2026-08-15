@@ -35,4 +35,18 @@ int getAppInputMethodStatus(const string& bundleId, const int& currentInputMetho
  */
 void setAppInputMethodStatus(const string& bundleId, const int& language);
 
+/**
+ * Remove app from smart switch key data
+ */
+void removeAppInputMethodStatus(const string& bundleId);
+
+/**
+ * Clear all smart switch key data
+ */
+void clearAllAppInputMethodStatus();
+
+int getSmartSwitchKeyCount();
+const char* getSmartSwitchKeyBundleId(int index);
+int getSmartSwitchKeyLanguage(int index);
+
 #endif /* SmartSwitchKey_h */

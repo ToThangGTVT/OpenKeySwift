@@ -467,7 +467,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YGb-a8-1Lb">
-                        <rect key="frame" x="18" y="114" width="268" height="18"/>
+                        <rect key="frame" x="18" y="114" width="192" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <string key="toolTip">Bạn đang sử dụng Safari và dùng chế độ gõ Tiếng Việt, bạn chuyển qua Terminal và chuyển chế độ gõ qua Tiếng Anh, OpenKeySwift sẽ tự ghi nhớ thao tác cho bạn, khi bạn chuyển về lại Safari, OpenKeySwift sẽ tự chuyển sang chế độ Tiếng Việt, sau đó nếu lại quay lại Terminal, OpenKeySwift cũng sẽ tự đổi qua chế độ Tiếng Anh</string>
                         <buttonCell key="cell" type="check" title="Chuyển chế độ thông minh" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" inset="2" id="OF9-V8-caS">
@@ -476,6 +476,17 @@
                         </buttonCell>
                         <connections>
                             <action selector="onAutoRememberSwitchKey:" target="-2" id="Ghi-2i-Y6n"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Quản lý danh sách ứng dụng và chế độ gõ riêng" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AIM-cfg-btn">
+                        <rect key="frame" x="212" y="110" width="78" height="24"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Cấu hình..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AIM-cfg-cel">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="onAppInputModeButton:" target="-2" id="AIM-act-cfg"/>
                         </connections>
                     </button>
                     <button toolTip="Vẫn cho phép gõ các chữ z w j f làm phụ âm đầu khi bật tính năng kiểm tra chính tả" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uOQ-qL-V9O">

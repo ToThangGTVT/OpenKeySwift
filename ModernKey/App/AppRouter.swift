@@ -12,6 +12,7 @@ protocol AppRouterProtocol {
     func openMacroWindow()
     func openConvertToolWindow()
     func openAboutWindow()
+    func openAppInputModeWindow()
     func showQuickConvertResult(success: Bool)
 }
 
@@ -22,6 +23,7 @@ final class AppRouter: AppRouterProtocol {
     private var macroWC: NSWindowController?
     private var convertWC: NSWindowController?
     private var aboutWC: NSWindowController?
+    private var appInputModeWC: NSWindowController?
     
     private init() {}
     
@@ -76,6 +78,13 @@ final class AppRouter: AppRouterProtocol {
         show(&aboutWC) {
             let vc = AboutBuilder.build()
             return self.makeWindowController(vc, title: "Thông tin phần mềm")
+        }
+    }
+    
+    func openAppInputModeWindow() {
+        show(&appInputModeWC) {
+            let vc = AppInputModeBuilder.build()
+            return self.makeWindowController(vc, title: "Quản lý Chế độ Gõ theo Ứng dụng", styleMask: [.titled, .closable, .miniaturizable, .resizable])
         }
     }
     

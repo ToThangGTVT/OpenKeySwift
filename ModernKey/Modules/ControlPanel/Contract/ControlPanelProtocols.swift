@@ -83,6 +83,7 @@ protocol ControlPanelPresenterProtocol: AnyObject {
     func didTapRetryPermission()
     func didTapOpenMacroWindow()
     func didTapOpenConvertToolWindow()
+    func didTapOpenAppInputModeWindow()
 }
 
 // MARK: - Interactor
@@ -107,5 +108,6 @@ protocol ControlPanelRouterProtocol: AnyObject {
     func openMacroWindow()
     func openConvertToolWindow()
     func openAboutWindow()
+    func openAppInputModeWindow()
     func showUpdateAlert(needUpdating: Bool, newVersion: String, parentWindow: NSWindow?, confirmUpdate: @escaping () -> Void)
 }

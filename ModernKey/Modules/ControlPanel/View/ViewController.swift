@@ -387,6 +387,10 @@ class ViewController: NSViewController, ControlPanelViewProtocol, MyTextFieldDel
         presenter?.didToggleUseSmartSwitchKey(isOn: AutoRememberSwitchKey.state == .on)
     }
     
+    @IBAction func onAppInputModeButton(_ sender: Any) {
+        presenter?.didTapOpenAppInputModeWindow()
+    }
+    
     @IBAction func onUpperCaseFirstChar(_ sender: Any) {
         presenter?.didToggleUpperCaseFirstChar(isOn: UpperCaseFirstChar.state == .on)
     }

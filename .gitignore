@@ -4,6 +4,7 @@
 # Xcode — build output
 build/
 DerivedData/
+*.app/
 *.o
 *.hmap
 *.ipa

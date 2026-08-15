@@ -496,10 +496,11 @@ final class ClipboardPanel: NSObject, ClipboardPanelViewProtocol, NSTableViewDat
             .replacingOccurrences(of: "\t", with: " ")
             .trimmingCharacters(in: .whitespaces)
         cell.textField?.textColor = isSelected ? .white : .labelColor
+        cell.textField?.font = isSelected ? .systemFont(ofSize: 13, weight: .medium) : .systemFont(ofSize: 13)
 
         if let sct = cell.viewWithTag(Self.shortcutLabelTag) as? NSTextField {
             sct.stringValue = row < 9 ? "⌘\(row + 1)" : ""
-            sct.textColor = isSelected ? NSColor.white.withAlphaComponent(0.8) : .secondaryLabelColor
+            sct.textColor = isSelected ? NSColor.white.withAlphaComponent(0.85) : .secondaryLabelColor
         }
         return cell
     }
@@ -511,8 +512,9 @@ final class ClipboardPanel: NSObject, ClipboardPanelViewProtocol, NSTableViewDat
             if let cell = rowView.view(atColumn: 0) as? NSTableCellView {
                 let isSelected = (row == self.tableView.selectedRow)
                 cell.textField?.textColor = isSelected ? .white : .labelColor
+                cell.textField?.font = isSelected ? .systemFont(ofSize: 13, weight: .medium) : .systemFont(ofSize: 13)
                 if let sct = cell.viewWithTag(Self.shortcutLabelTag) as? NSTextField {
-                    sct.textColor = isSelected ? NSColor.white.withAlphaComponent(0.8) : .secondaryLabelColor
+                    sct.textColor = isSelected ? NSColor.white.withAlphaComponent(0.85) : .secondaryLabelColor
                 }
             }
         }
@@ -539,12 +541,7 @@ final class ClipboardTableRowView: NSTableRowView {
         let selectionRect = bounds.insetBy(dx: Self.horizontalInset, dy: Self.verticalInset)
         let path = NSBezierPath(roundedRect: selectionRect, xRadius: Self.cornerRadius, yRadius: Self.cornerRadius)
         
-        let selectionColor: NSColor
-        if #available(macOS 10.14, *) {
-            selectionColor = NSColor.controlAccentColor
-        } else {
-            selectionColor = NSColor.selectedContentBackgroundColor
-        }
+        let selectionColor = NSColor.systemBlue
         selectionColor.setFill()
         path.fill()
     }
