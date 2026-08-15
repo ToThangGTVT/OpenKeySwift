@@ -1,5 +1,13 @@
 # OpenKeySwift - Bộ gõ Tiếng Việt hiện đại cho macOS
 
+
+<img width="320" height="447" alt="Screenshot 2026-08-15 at 11 40 05" src="https://github.com/user-attachments/assets/0c3ea881-24d1-4d6e-89ef-a1c28f39c8f7" />
+
+<img width="728" height="667" alt="Screenshot 2026-08-15 at 11 40 32" src="https://github.com/user-attachments/assets/62c265a0-5c40-4de4-b90e-9698ffd05309" />
+
+<img width="692" height="564" alt="Screenshot 2026-08-15 at 11 41 01" src="https://github.com/user-attachments/assets/cb546b9d-2398-4bba-ab59-d4693d55a59b" />
+
+
 **OpenKeySwift** là bộ gõ Tiếng Việt gọn nhẹ, mượt mà và tối ưu dành riêng cho macOS. Ứng dụng giúp bạn gõ Tiếng Việt chuẩn xác, khắc phục triệt để tình trạng gạch chân, mất chữ, nuốt ký tự hay lỗi nhảy chữ trên các trình duyệt web và ứng dụng đồ họa/lập trình.
 
 ---
